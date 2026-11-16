@@ -47,3 +47,30 @@ class AcademicEvent(Base):
     max_marks = Column(Numeric(5, 2))
     ai_insights = Column(JSON)
     created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
+
+
+
+# backend/models.py (Add to the bottom of the file)
+from sqlalchemy import Integer # Make sure Integer is imported at the top if it isn't already
+
+class Class(Base):
+    __tablename__ = "classes"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=text("uuid_generate_v4()"))
+    organization_id = Column(UUID(as_uuid=True), ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False)
+    name = Column(String(100), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
+
+class Subject(Base):
+    __tablename__ = "subjects"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=text("uuid_generate_v4()"))
+    class_id = Column(UUID(as_uuid=True), ForeignKey("classes.id", ondelete="CASCADE"), nullable=False)
+    name = Column(String(100), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
+
+class Chapter(Base):
+    __tablename__ = "chapters"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=text("uuid_generate_v4()"))
+    subject_id = Column(UUID(as_uuid=True), ForeignKey("subjects.id", ondelete="CASCADE"), nullable=False)
+    name = Column(String(255), nullable=False)
+    chapter_number = Column(Integer)
+    created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
