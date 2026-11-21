@@ -1,13 +1,16 @@
 import { useState } from "react";
 import { useCreateStudent } from "../hooks/useStudents";
+import { useClasses } from "../hooks/useCurriculum";
 
 export default function AddStudentModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     full_name: "",
     parent_name: "",
     parent_phone: "",
+    class_id: "",
   });
 
+  const { data: classes = [] } = useClasses();
   const { mutateAsync: addStudent, isPending, error } = useCreateStudent();
 
   if (!isOpen) return null;
@@ -15,11 +18,19 @@ export default function AddStudentModal({ isOpen, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await addStudent(formData);
-      setFormData({ full_name: "", parent_name: "", parent_phone: "" });
+      await addStudent({
+        ...formData,
+        class_id: formData.class_id || null,
+      });
+      setFormData({
+        full_name: "",
+        parent_name: "",
+        parent_phone: "",
+        class_id: "",
+      });
       onClose();
     } catch {
-      // Error is handled by TanStack Query's `error` state
+      // Handled by TanStack Query error state
     }
   };
 
@@ -56,6 +67,27 @@ export default function AddStudentModal({ isOpen, onClose }) {
                 setFormData({ ...formData, full_name: e.target.value })
               }
             />
+          </div>
+
+          <div>
+            <label className="mb-1 block text-sm font-medium text-gray-700">
+              Class
+            </label>
+            <select
+              required
+              className="w-full rounded-lg border border-gray-300 bg-white p-2 outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500"
+              value={formData.class_id}
+              onChange={(e) =>
+                setFormData({ ...formData, class_id: e.target.value })
+              }
+            >
+              <option value="">Select a class...</option>
+              {classes.map((cls) => (
+                <option key={cls.id} value={cls.id}>
+                  {cls.name}
+                </option>
+              ))}
+            </select>
           </div>
 
           <div>

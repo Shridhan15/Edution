@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { useStudents } from "../hooks/useStudents";
+import { useNavigate } from "react-router-dom";
 import AddStudentModal from "../components/AddStudentModal";
 
 export default function StudentList() {
   const { data: students = [], isLoading, error } = useStudents();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const navigate = useNavigate();
 
   if (isLoading)
     return <div className="p-8 text-gray-500">Loading students...</div>;
@@ -45,7 +47,8 @@ export default function StudentList() {
               students.map((student) => (
                 <tr
                   key={student.id}
-                  className="border-b border-gray-50 transition-colors hover:bg-gray-50/50"
+                  onClick={() => navigate(`/students/${student.id}`)}
+                  className="border-b border-gray-50 transition-colors hover:bg-blue-50/40 cursor-pointer"
                 >
                   <td className="p-4 font-medium text-gray-900">
                     {student.full_name}

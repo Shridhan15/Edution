@@ -80,10 +80,12 @@ export default function Curriculum() {
               </h2>
               <div className="flex gap-6 mt-2 text-sm text-gray-500 font-medium">
                 <span className="flex items-center gap-1">
-                  📚 Subjects: <span className="text-gray-900">0</span>
+                  📚 Subjects:{" "}
+                  <span className="text-gray-900">{cls.subject_count}</span>
                 </span>
                 <span className="flex items-center gap-1">
-                  🎓 Enrolled Students: <span className="text-gray-900">0</span>
+                  🎓 Enrolled Students:{" "}
+                  <span className="text-gray-900">{cls.student_count}</span>
                 </span>
               </div>
             </div>

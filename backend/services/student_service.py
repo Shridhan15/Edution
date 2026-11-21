@@ -2,6 +2,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 import models
 import schemas
+from fastapi import HTTPException
+
 
 async def get_default_organization(db: AsyncSession):
     # Grab the first organization in the database
@@ -35,3 +37,12 @@ async def create_student(db: AsyncSession, student: schemas.StudentCreate):
 async def get_all_students(db: AsyncSession):
     result = await db.execute(select(models.Student))
     return result.scalars().all()
+
+
+
+async def get_student_by_id(db: AsyncSession, student_id: str):
+    result = await db.execute(select(models.Student).where(models.Student.id == student_id))
+    student = result.scalars().first()
+    if not student:
+        raise HTTPException(status_code=404, detail="Student not found")
+    return student

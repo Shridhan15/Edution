@@ -34,13 +34,14 @@ export function useSubjects(classId) {
 }
 
 export function useCreateSubject(classId) {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: createSubject,
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["subjects", classId] });
-        },
-    });
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: createSubject,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["subjects", classId] });
+      queryClient.invalidateQueries({ queryKey: ["classes"] }); // Updates subject count
+    },
+  });
 }
 
 export function useChapters(subjectId) {

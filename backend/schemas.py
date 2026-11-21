@@ -7,6 +7,7 @@ class StudentBase(BaseModel):
     full_name: str
     parent_name: Optional[str] = None
     parent_phone: Optional[str] = None
+    class_id: Optional[UUID4] = None
     status: str = "ACTIVE"
 
 # Update the StudentCreate class to look like this:
@@ -24,8 +25,7 @@ class StudentResponse(StudentBase):
 
 
 
-# backend/schemas.py
-# (Keep your existing Student schemas at the top)
+
 
 # --- CLASSES ---
 class ClassBase(BaseModel):
@@ -67,5 +67,14 @@ class ChapterCreate(ChapterBase):
 class ChapterResponse(ChapterBase):
     id: UUID4
     
+    class Config:
+        from_attributes = True
+
+class ClassResponse(ClassBase):
+    id: UUID4
+    organization_id: UUID4
+    subject_count: int = 0
+    student_count: int = 0
+
     class Config:
         from_attributes = True

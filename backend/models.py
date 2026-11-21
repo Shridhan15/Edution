@@ -18,22 +18,18 @@ class Teacher(Base):
     email = Column(String(255), unique=True, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
 
-# backend/models.py
 
-# backend/models.py
 
 class Student(Base):
     __tablename__ = "students"
     id = Column(UUID(as_uuid=True), primary_key=True, server_default=text("uuid_generate_v4()"))
     organization_id = Column(UUID(as_uuid=True), ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False)
+    class_id = Column(UUID(as_uuid=True), ForeignKey("classes.id", ondelete="SET NULL"), nullable=True)
     full_name = Column(String(255), nullable=False)
     parent_name = Column(String(255), nullable=True)
     parent_phone = Column(String(20), nullable=True)
     status = Column(String(20), default="ACTIVE")
-    
-    # --- Add this missing column ---
     joining_date = Column(Date, server_default=text("CURRENT_DATE"))
-    
     created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
 
 class AcademicEvent(Base):

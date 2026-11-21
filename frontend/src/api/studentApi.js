@@ -16,10 +16,18 @@ export async function createStudent(studentData) {
     },
     body: JSON.stringify(studentData),
   });
-  
+
   if (!response.ok) {
     const errorData = await response.json();
     throw new Error(errorData.detail || "Failed to create student");
+  }
+  return response.json();
+}
+
+export async function fetchStudentById(studentId) {
+  const response = await fetch(`${BASE_URL}/students/${studentId}`);
+  if (!response.ok) {
+    throw new Error("Failed to fetch student profile");
   }
   return response.json();
 }

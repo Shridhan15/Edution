@@ -1,6 +1,7 @@
 # backend/services/curriculum_service.py
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
+from sqlalchemy import func, distinct
 import models
 import schemas
 from services.student_service import get_default_organization
@@ -15,8 +16,28 @@ async def create_class(db: AsyncSession, class_data: schemas.ClassCreate):
     return new_class
 
 async def get_classes(db: AsyncSession):
-    result = await db.execute(select(models.Class))
-    return result.scalars().all()
+    stmt = (
+        select(
+            models.Class,
+            func.count(distinct(models.Subject.id)).label("subject_count"),
+            func.count(distinct(models.Student.id)).label("student_count"),
+        )
+        .outerjoin(models.Subject, models.Subject.class_id == models.Class.id)
+        .outerjoin(models.Student, models.Student.class_id == models.Class.id)
+        .group_by(models.Class.id)
+    )
+    result = await db.execute(stmt)
+    
+    classes_with_counts = []
+    for cls, subject_count, student_count in result.all():
+        classes_with_counts.append({
+            "id": cls.id,
+            "organization_id": cls.organization_id,
+            "name": cls.name,
+            "subject_count": subject_count,
+            "student_count": student_count,
+        })
+    return classes_with_counts
 
 # --- SUBJECTS ---
 async def create_subject(db: AsyncSession, subject_data: schemas.SubjectCreate):
