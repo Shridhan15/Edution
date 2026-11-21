@@ -1,33 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import {
-  fetchClasses,
-  fetchSubjects,
-  createSubject,
-  fetchChapters,
-  createChapter,
-} from "../api/curriculumApi";
+  useClasses,
+  useSubjects,
+  useCreateSubject,
+  useChapters,
+  useCreateChapter,
+} from "../hooks/useCurriculum";
 
-// --- Sub-Component: Manages Chapters for a specific Subject ---
 function SubjectCard({ subject }) {
-  const [chapters, setChapters] = useState([]);
+  const { data: chapters = [], isLoading } = useChapters(subject.id);
+  const { mutateAsync: addChapter, isPending } = useCreateChapter(subject.id);
+
   const [newChapterName, setNewChapterName] = useState("");
   const [isAdding, setIsAdding] = useState(false);
-
-  useEffect(() => {
-    fetchChapters(subject.id).then(setChapters).catch(console.error);
-  }, [subject.id]);
 
   const handleAddChapter = async (e) => {
     e.preventDefault();
     if (!newChapterName.trim()) return;
 
-    const added = await createChapter({
+    await addChapter({
       name: newChapterName,
       subject_id: subject.id,
       chapter_number: chapters.length + 1,
     });
-    setChapters([...chapters, added]);
     setNewChapterName("");
     setIsAdding(false);
   };
@@ -42,13 +38,17 @@ function SubjectCard({ subject }) {
       </div>
 
       <div className="p-4 space-y-2">
-        {chapters.length === 0 && !isAdding && (
+        {isLoading && (
+          <p className="text-sm text-gray-400 text-center py-2">
+            Loading chapters...
+          </p>
+        )}
+        {!isLoading && chapters.length === 0 && !isAdding && (
           <p className="text-sm text-gray-400 text-center py-2">
             No chapters yet.
           </p>
         )}
 
-        {/* List of Chapters */}
         {chapters.map((chap) => (
           <div
             key={chap.id}
@@ -63,7 +63,6 @@ function SubjectCard({ subject }) {
               </span>
             </div>
 
-            {/* The Material Upload Icon / Button (Placeholder for next step) */}
             <button className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 bg-blue-50 px-2 py-1 rounded">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -84,7 +83,6 @@ function SubjectCard({ subject }) {
           </div>
         ))}
 
-        {/* Add Chapter Form */}
         {isAdding ? (
           <form onSubmit={handleAddChapter} className="flex gap-2 mt-2">
             <input
@@ -97,9 +95,10 @@ function SubjectCard({ subject }) {
             />
             <button
               type="submit"
-              className="bg-slate-900 text-white px-3 py-2 text-sm rounded-lg hover:bg-slate-800"
+              disabled={isPending}
+              className="bg-slate-900 text-white px-3 py-2 text-sm rounded-lg hover:bg-slate-800 disabled:opacity-50"
             >
-              Save
+              {isPending ? "..." : "Save"}
             </button>
           </form>
         ) : (
@@ -115,45 +114,29 @@ function SubjectCard({ subject }) {
   );
 }
 
-// --- Main Component: Manages the Class and its Subjects ---
 export default function ClassDetails() {
   const { classId } = useParams();
-  const [className, setClassName] = useState("Loading...");
-  const [subjects, setSubjects] = useState([]);
+  const { data: classes = [] } = useClasses();
+  const { data: subjects = [], isLoading } = useSubjects(classId);
+  const { mutateAsync: addSubject, isPending } = useCreateSubject(classId);
 
   const [newSubjectName, setNewSubjectName] = useState("");
   const [isAddingSubject, setIsAddingSubject] = useState(false);
 
-  // Fetch Class Name and Subjects on mount
-  useEffect(() => {
-    // A quick hack to get the class name without a new backend endpoint
-    fetchClasses()
-      .then((classes) => {
-        const currentClass = classes.find((c) => c.id === classId);
-        if (currentClass) setClassName(currentClass.name);
-      })
-      .catch(console.error);
-
-    // Fetch the subjects for this specific class
-    fetchSubjects(classId).then(setSubjects).catch(console.error);
-  }, [classId]);
+  const currentClass = classes.find((c) => c.id === classId);
+  const className = currentClass ? currentClass.name : "Class Details";
 
   const handleAddSubject = async (e) => {
     e.preventDefault();
     if (!newSubjectName.trim()) return;
 
-    const added = await createSubject({
-      name: newSubjectName,
-      class_id: classId,
-    });
-    setSubjects([...subjects, added]);
+    await addSubject({ name: newSubjectName, class_id: classId });
     setNewSubjectName("");
     setIsAddingSubject(false);
   };
 
   return (
     <div className="p-8">
-      {/* Navigation & Header */}
       <div className="mb-8">
         <Link
           to="/curriculum"
@@ -172,7 +155,6 @@ export default function ClassDetails() {
         </div>
       </div>
 
-      {/* Add Subject Form */}
       {isAddingSubject && (
         <form
           onSubmit={handleAddSubject}
@@ -188,15 +170,17 @@ export default function ClassDetails() {
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+            disabled={isPending}
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
           >
-            Save Subject
+            {isPending ? "Saving..." : "Save Subject"}
           </button>
         </form>
       )}
 
-      {/* Subjects Grid */}
-      {subjects.length === 0 && !isAddingSubject ? (
+      {isLoading ? (
+        <div className="text-gray-500">Loading subjects...</div>
+      ) : subjects.length === 0 && !isAddingSubject ? (
         <div className="text-center text-gray-500 py-10 bg-white rounded-xl border border-gray-100">
           No subjects found for this class. Click "+ Add Subject" to start.
         </div>

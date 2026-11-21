@@ -1,26 +1,28 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchClasses, createClass } from "../api/curriculumApi";
+import { useClasses, useCreateClass } from "../hooks/useCurriculum";
 
 export default function Curriculum() {
-  const [classes, setClasses] = useState([]);
+  const { data: classes = [], isLoading, error } = useClasses();
+  const { mutateAsync: addClass, isPending } = useCreateClass();
+
   const [newClassName, setNewClassName] = useState("");
   const [isAdding, setIsAdding] = useState(false);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    fetchClasses().then(setClasses).catch(console.error);
-  }, []);
 
   const handleAddClass = async (e) => {
     e.preventDefault();
     if (!newClassName.trim()) return;
 
-    const added = await createClass({ name: newClassName });
-    setClasses([...classes, added]);
+    await addClass({ name: newClassName });
     setNewClassName("");
     setIsAdding(false);
   };
+
+  if (isLoading)
+    return <div className="p-8 text-gray-500">Loading curriculum...</div>;
+  if (error)
+    return <div className="p-8 text-red-500">Error: {error.message}</div>;
 
   return (
     <div className="p-8">
@@ -36,7 +38,6 @@ export default function Curriculum() {
         </button>
       </div>
 
-      {/* Add Class Form */}
       {isAdding && (
         <form
           onSubmit={handleAddClass}
@@ -52,14 +53,14 @@ export default function Curriculum() {
           />
           <button
             type="submit"
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700"
+            disabled={isPending}
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
           >
-            Save Class
+            {isPending ? "Saving..." : "Save Class"}
           </button>
         </form>
       )}
 
-      {/* Classes List */}
       <div className="space-y-4">
         {classes.length === 0 && !isAdding && (
           <div className="text-center text-gray-500 py-10 bg-white rounded-xl border border-gray-100">
@@ -78,7 +79,6 @@ export default function Curriculum() {
                 {cls.name}
               </h2>
               <div className="flex gap-6 mt-2 text-sm text-gray-500 font-medium">
-                {/* These are placeholders until we wire up the aggregation API */}
                 <span className="flex items-center gap-1">
                   📚 Subjects: <span className="text-gray-900">0</span>
                 </span>

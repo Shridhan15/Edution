@@ -1,31 +1,25 @@
 import { useState } from "react";
-import { createStudent } from "../api/studentApi";
+import { useCreateStudent } from "../hooks/useStudents";
 
-export default function AddStudentModal({ isOpen, onClose, onSuccess }) {
+export default function AddStudentModal({ isOpen, onClose }) {
   const [formData, setFormData] = useState({
     full_name: "",
     parent_name: "",
     parent_phone: "",
   });
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+
+  const { mutateAsync: addStudent, isPending, error } = useCreateStudent();
 
   if (!isOpen) return null;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
-
     try {
-      await createStudent(formData);
+      await addStudent(formData);
       setFormData({ full_name: "", parent_name: "", parent_phone: "" });
-      onSuccess();
       onClose();
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
+    } catch {
+      // Error is handled by TanStack Query's `error` state
     }
   };
 
@@ -44,7 +38,7 @@ export default function AddStudentModal({ isOpen, onClose, onSuccess }) {
 
         {error && (
           <div className="mb-4 rounded bg-red-50 p-3 text-sm text-red-600">
-            {error}
+            {error.message}
           </div>
         )}
 
@@ -102,10 +96,10 @@ export default function AddStudentModal({ isOpen, onClose, onSuccess }) {
             </button>
             <button
               type="submit"
-              disabled={loading}
+              disabled={isPending}
               className="rounded-lg bg-slate-900 px-4 py-2 text-white hover:bg-slate-800 disabled:opacity-50"
             >
-              {loading ? "Adding..." : "Add Student"}
+              {isPending ? "Adding..." : "Add Student"}
             </button>
           </div>
         </form>

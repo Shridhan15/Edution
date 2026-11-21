@@ -1,31 +1,15 @@
-import { useState, useEffect } from "react";
-import { fetchStudents } from "../api/studentApi";
+import { useState } from "react";
+import { useStudents } from "../hooks/useStudents";
 import AddStudentModal from "../components/AddStudentModal";
 
 export default function StudentList() {
-  const [students, setStudents] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Controls modal visibility
+  const { data: students = [], isLoading, error } = useStudents();
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const loadStudents = async () => {
-    try {
-      const data = await fetchStudents();
-      setStudents(data);
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadStudents();
-  }, []);
-
-  if (loading)
+  if (isLoading)
     return <div className="p-8 text-gray-500">Loading students...</div>;
-  if (error) return <div className="p-8 text-red-500">Error: {error}</div>;
+  if (error)
+    return <div className="p-8 text-red-500">Error: {error.message}</div>;
 
   return (
     <div className="p-8">
@@ -87,11 +71,9 @@ export default function StudentList() {
         </table>
       </div>
 
-      {/* Mount the Modal here */}
       <AddStudentModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        onSuccess={loadStudents}
       />
     </div>
   );
