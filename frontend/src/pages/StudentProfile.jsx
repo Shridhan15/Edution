@@ -1,12 +1,16 @@
+import { useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { useStudent } from "../hooks/useStudents";
 import { useClasses } from "../hooks/useCurriculum";
 import StudentHeader from "../components/student/StudentHeader";
 import StudentContactCard from "../components/student/StudentContactCard";
 import StudentTimeline from "../components/student/StudentTimeline";
+import EditStudentModal from "../components/student/EditStudentModal";
 
 export default function StudentProfile() {
   const { studentId } = useParams();
+  const [isEditOpen, setIsEditOpen] = useState(false);
+
   const { data: student, isLoading, error } = useStudent(studentId);
   const { data: classes = [] } = useClasses();
 
@@ -26,7 +30,11 @@ export default function StudentProfile() {
         &larr; Back to Students
       </Link>
 
-      <StudentHeader student={student} className={enrolledClass?.name} />
+      <StudentHeader
+        student={student}
+        className={enrolledClass?.name}
+        onEditClick={() => setIsEditOpen(true)}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div className="lg:col-span-1">
@@ -36,6 +44,12 @@ export default function StudentProfile() {
           <StudentTimeline />
         </div>
       </div>
+
+      <EditStudentModal
+        isOpen={isEditOpen}
+        onClose={() => setIsEditOpen(false)}
+        student={student}
+      />
     </div>
   );
 }

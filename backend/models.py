@@ -29,6 +29,7 @@ class Student(Base):
     parent_name = Column(String(255), nullable=True)
     parent_phone = Column(String(20), nullable=True)
     status = Column(String(20), default="ACTIVE")
+    photo_url = Column(String, nullable=True)
     joining_date = Column(Date, server_default=text("CURRENT_DATE"))
     created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
 

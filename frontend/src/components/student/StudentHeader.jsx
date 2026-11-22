@@ -1,4 +1,14 @@
-export default function StudentHeader({ student, className }) {
+import { useRef } from "react";
+import { useUploadStudentPhoto } from "../../hooks/useStudents";
+
+export default function StudentHeader({ student, className, onEditClick }) {
+  const fileInputRef = useRef(null);
+  const {
+    mutate: uploadPhoto,
+    isPending,
+    error,
+  } = useUploadStudentPhoto(student.id);
+
   const initials = student.full_name
     .split(" ")
     .map((n) => n[0])
@@ -6,46 +16,84 @@ export default function StudentHeader({ student, className }) {
     .toUpperCase()
     .slice(0, 2);
 
-  return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 flex items-center justify-between">
-      <div className="flex items-center gap-5">
-        {/* Photo Placeholder */}
-        <div className="h-16 w-16 rounded-full bg-slate-900 text-white flex items-center justify-center text-xl font-bold shrink-0">
-          {initials}
-        </div>
+  const handleFileChange = (e) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    uploadPhoto(file);
+    e.target.value = ""; // Reset input so the same file can be re-selected if needed
+  };
 
-        <div>
-          <div className="flex items-center gap-3">
-            <h1 className="text-2xl font-bold text-gray-900">
-              {student.full_name}
-            </h1>
-            <span
-              className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
-                student.status === "ACTIVE"
-                  ? "bg-green-100 text-green-700"
-                  : "bg-gray-100 text-gray-700"
+  return (
+    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-5">
+          {/* Interactive Avatar */}
+          <div
+            onClick={() => !isPending && fileInputRef.current?.click()}
+            className="relative h-16 w-16 rounded-full bg-slate-900 text-white flex items-center justify-center text-xl font-bold shrink-0 cursor-pointer overflow-hidden group"
+            title="Click to upload photo"
+          >
+            {student.photo_url ? (
+              <img
+                src={student.photo_url}
+                alt={student.full_name}
+                className="h-full w-full object-cover"
+              />
+            ) : (
+              initials
+            )}
+
+            {/* Hover / Uploading Overlay */}
+            <div
+              className={`absolute inset-0 bg-black/50 flex items-center justify-center text-xs font-medium text-white transition-opacity ${
+                isPending ? "opacity-100" : "opacity-0 group-hover:opacity-100"
               }`}
             >
-              {student.status}
-            </span>
+              {isPending ? "..." : "Edit"}
+            </div>
+
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/jpeg,image/png,image/webp"
+              onChange={handleFileChange}
+              className="hidden"
+            />
           </div>
 
-          <div className="flex items-center gap-4 mt-1 text-sm text-gray-500">
-            <span>🎓 {className || "Unassigned"}</span>
-            <span>•</span>
-            <span>Joined {student.joining_date}</span>
+          <div>
+            <div className="flex items-center gap-3">
+              <h1 className="text-2xl font-bold text-gray-900">
+                {student.full_name}
+              </h1>
+              <span
+                className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${
+                  student.status === "ACTIVE"
+                    ? "bg-green-100 text-green-700"
+                    : "bg-gray-100 text-gray-700"
+                }`}
+              >
+                {student.status}
+              </span>
+            </div>
+
+            <div className="flex items-center gap-4 mt-1 text-sm text-gray-500">
+              <span>🎓 {className || "Unassigned"}</span>
+              <span>•</span>
+              <span>Joined {student.joining_date}</span>
+            </div>
           </div>
         </div>
+
+        <button
+          onClick={onEditClick}
+          className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+        >
+          Edit Profile
+        </button>
       </div>
 
-      {/* Placeholder for future Edit / Photo Upload */}
-      <button
-        disabled
-        className="rounded-lg border border-gray-200 px-4 py-2 text-sm text-gray-400 cursor-not-allowed"
-        title="Coming soon"
-      >
-        Edit Profile
-      </button>
+      {error && <p className="mt-3 text-xs text-red-600">{error.message}</p>}
     </div>
   );
 }

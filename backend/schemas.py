@@ -18,6 +18,7 @@ class StudentResponse(StudentBase):
     id: UUID4
     organization_id: UUID4
     joining_date: date
+    photo_url: Optional[str] = None
     created_at: datetime
 
     class Config:
@@ -78,3 +79,11 @@ class ClassResponse(ClassBase):
 
     class Config:
         from_attributes = True
+
+
+class StudentUpdate(BaseModel):
+    full_name: Optional[str] = None
+    parent_name: Optional[str] = None
+    parent_phone: Optional[str] = None
+    class_id: Optional[UUID4] = None
+    status: Optional[str] = None

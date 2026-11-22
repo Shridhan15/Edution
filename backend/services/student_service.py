@@ -2,8 +2,8 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 import models
 import schemas
-from fastapi import HTTPException
-
+from fastapi import HTTPException, UploadFile
+from services import storage_service
 
 async def get_default_organization(db: AsyncSession):
     # Grab the first organization in the database
@@ -46,3 +46,40 @@ async def get_student_by_id(db: AsyncSession, student_id: str):
     if not student:
         raise HTTPException(status_code=404, detail="Student not found")
     return student
+
+
+async def update_student(db: AsyncSession, student_id: str, student_update: schemas.StudentUpdate):
+    student = await get_student_by_id(db, student_id)
+    
+    update_data = student_update.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(student, field, value)
+        
+    await db.commit()
+    await db.refresh(student)
+    return student
+
+
+
+
+async def update_student_photo(db: AsyncSession, student_id: str, file: UploadFile):
+    student = await get_student_by_id(db, student_id)
+    photo_url = await storage_service.upload_student_photo(student_id, file)
+    
+    student.photo_url = photo_url
+    await db.commit()
+    await db.refresh(student)
+    return student
+
+
+async def delete_student(db: AsyncSession, student_id: str):
+    student = await get_student_by_id(db, student_id)
+
+    await db.delete(student)
+    await db.commit()
+
+    # Best-effort cleanup of storage files so a storage hiccup doesn't break the response
+    try:
+        storage_service.delete_student_folder(student_id)
+    except Exception as e:
+        print(f"Warning: failed to clean up storage for student {student_id}: {e}")
