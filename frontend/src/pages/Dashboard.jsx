@@ -1,29 +1,83 @@
-// frontend/src/pages/Dashboard.jsx
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
+import { useStudents } from "../hooks/useStudents";
+import { useClasses } from "../hooks/useCurriculum";
+import AddStudentModal from "../components/AddStudentModal";
+import DashboardHeader from "../components/dashboard/DashboardHeader";
+import StatsGrid from "../components/dashboard/StatsGrid";
+import ClassesOverviewCard from "../components/dashboard/ClassesOverviewCard";
+import RecentStudentsCard from "../components/dashboard/RecentStudentsCard";
 
 export default function Dashboard() {
-  const [status, setStatus] = useState("Checking backend...");
+  const [isAddStudentOpen, setIsAddStudentOpen] = useState(false);
 
-  useEffect(() => {
-    fetch("http://localhost:8000/api/health")
-      .then((res) => res.json())
-      .then((data) => setStatus(`${data.status} | ${data.database}`))
-      .catch(() => setStatus("Backend offline"));
-  }, []);
+  const {
+    data: students = [],
+    isLoading: studentsLoading,
+    error: studentsError,
+  } = useStudents();
+
+  const {
+    data: classes = [],
+    isLoading: classesLoading,
+    error: classesError,
+  } = useClasses();
+
+  const classMap = useMemo(
+    () => Object.fromEntries(classes.map((cls) => [cls.id, cls.name])),
+    [classes],
+  );
+
+  const stats = useMemo(() => {
+    const activeStudents = students.filter((s) => s.status === "ACTIVE").length;
+    const totalSubjects = classes.reduce(
+      (sum, cls) => sum + (cls.subject_count || 0),
+      0,
+    );
+    return {
+      totalStudents: students.length,
+      activeStudents,
+      totalClasses: classes.length,
+      totalSubjects,
+    };
+  }, [students, classes]);
+
+  const recentStudents = useMemo(() => {
+    return [...students]
+      .sort((a, b) => new Date(b.joining_date) - new Date(a.joining_date))
+      .slice(0, 5);
+  }, [students]);
+
+  if (studentsLoading || classesLoading) {
+    return <div className="p-8 text-gray-500">Loading dashboard...</div>;
+  }
+
+  if (studentsError || classesError) {
+    return (
+      <div className="p-8 text-red-500">
+        Error loading dashboard: {(studentsError || classesError).message}
+      </div>
+    );
+  }
 
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold text-gray-800 mb-4">
-        Teacher Dashboard
-      </h1>
-      <div className="rounded-xl bg-white p-6 shadow-sm border border-gray-100">
-        <div className="flex items-center space-x-2">
-          <span
-            className={`flex h-3 w-3 rounded-full ${status.includes("offline") ? "bg-red-500" : "bg-green-500"}`}
-          ></span>
-          <p className="text-gray-600 font-medium text-sm">{status}</p>
+    <div className="space-y-6 p-8">
+      <DashboardHeader onAddStudentClick={() => setIsAddStudentOpen(true)} />
+
+      <StatsGrid {...stats} />
+
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <ClassesOverviewCard classes={classes} />
+        </div>
+        <div className="lg:col-span-1">
+          <RecentStudentsCard students={recentStudents} classMap={classMap} />
         </div>
       </div>
+
+      <AddStudentModal
+        isOpen={isAddStudentOpen}
+        onClose={() => setIsAddStudentOpen(false)}
+      />
     </div>
   );
 }
