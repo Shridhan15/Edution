@@ -23,6 +23,9 @@ export default function Layout() {
           >
             Curriculum
           </Link>
+          <Link to="/batches" className="hover:text-blue-400 transition-colors">
+            Batches
+          </Link>
         </nav>
       </aside>
 

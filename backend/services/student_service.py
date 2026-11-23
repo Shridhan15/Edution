@@ -83,3 +83,30 @@ async def delete_student(db: AsyncSession, student_id: str):
         storage_service.delete_student_folder(student_id)
     except Exception as e:
         print(f"Warning: failed to clean up storage for student {student_id}: {e}")
+
+
+async def get_student_profile(db: AsyncSession, student_id: str):
+    student = await get_student_by_id(db, student_id)
+
+    batches_stmt = (
+        select(models.Batch)
+        .join(models.BatchStudent, models.BatchStudent.batch_id == models.Batch.id)
+        .where(models.BatchStudent.student_id == student_id)
+        .order_by(models.Batch.start_time)
+    )
+    batches_result = await db.execute(batches_stmt)
+    batches = batches_result.scalars().all()
+
+    return {
+        "id": student.id,
+        "organization_id": student.organization_id,
+        "class_id": student.class_id,
+        "full_name": student.full_name,
+        "parent_name": student.parent_name,
+        "parent_phone": student.parent_phone,
+        "status": student.status,
+        "joining_date": student.joining_date,
+        "photo_url": student.photo_url,
+        "created_at": student.created_at,
+        "batches": batches,
+    }

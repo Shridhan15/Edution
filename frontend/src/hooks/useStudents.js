@@ -66,6 +66,7 @@ export function useDeleteStudent() {
     mutationFn: deleteStudent,
     onSuccess: (_, studentId) => {
       queryClient.removeQueries({ queryKey: ["students", studentId] });
+      queryClient.invalidateQueries({ queryKey: ["batches"] });
       queryClient.invalidateQueries({ queryKey: ["students"] });
       queryClient.invalidateQueries({ queryKey: ["classes"] });
     },

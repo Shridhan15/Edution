@@ -1,6 +1,6 @@
 # backend/models.py
-from sqlalchemy import Column, String, Integer, Numeric, Date, DateTime, ForeignKey, text, JSON
-from sqlalchemy.dialects.postgresql import UUID
+from sqlalchemy import Column, String, Integer, Numeric, Date, DateTime, ForeignKey, text, JSON, Time
+from sqlalchemy.dialects.postgresql import UUID, ARRAY
 from sqlalchemy.orm import relationship
 from database import Base
 
@@ -71,3 +71,21 @@ class Chapter(Base):
     name = Column(String(255), nullable=False)
     chapter_number = Column(Integer)
     created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
+
+
+class Batch(Base):
+    __tablename__ = "batches"
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=text("uuid_generate_v4()"))
+    organization_id = Column(UUID(as_uuid=True), ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False)
+    class_id = Column(UUID(as_uuid=True), ForeignKey("classes.id", ondelete="SET NULL"), nullable=True)
+    name = Column(String(100), nullable=False)
+    start_time = Column(Time, nullable=False)
+    end_time = Column(Time, nullable=False)
+    days_of_week = Column(ARRAY(String), default=list)
+    created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
+
+class BatchStudent(Base):
+    __tablename__ = "batch_students"
+    batch_id = Column(UUID(as_uuid=True), ForeignKey("batches.id", ondelete="CASCADE"), primary_key=True)
+    student_id = Column(UUID(as_uuid=True), ForeignKey("students.id", ondelete="CASCADE"), primary_key=True)
+    joined_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))

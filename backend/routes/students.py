@@ -17,9 +17,9 @@ async def create_student(student: schemas.StudentCreate, db: AsyncSession = Depe
 async def get_students(db: AsyncSession = Depends(get_db)):
     return await student_service.get_all_students(db)
 
-@router.get("/{student_id}", response_model=schemas.StudentResponse)
+@router.get("/{student_id}", response_model=schemas.StudentDetailResponse)
 async def get_student(student_id: str, db: AsyncSession = Depends(get_db)):
-    return await student_service.get_student_by_id(db, student_id)
+    return await student_service.get_student_profile(db, student_id)
 
 @router.patch("/{student_id}", response_model=schemas.StudentResponse)
 async def update_student(

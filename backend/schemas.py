@@ -1,7 +1,7 @@
 # backend/schemas.py
 from pydantic import BaseModel, UUID4
-from datetime import date, datetime
-from typing import Optional
+from datetime import date, datetime, time
+from typing import Optional, List
 
 class StudentBase(BaseModel):
     full_name: str
@@ -87,3 +87,45 @@ class StudentUpdate(BaseModel):
     parent_phone: Optional[str] = None
     class_id: Optional[UUID4] = None
     status: Optional[str] = None
+
+
+
+
+# --- BATCHES ---
+class BatchBase(BaseModel):
+    name: str
+    class_id: Optional[UUID4] = None
+    start_time: time
+    end_time: time
+    days_of_week: List[str] = []
+
+class BatchCreate(BatchBase):
+    pass
+
+class BatchResponse(BatchBase):
+    id: UUID4
+    organization_id: UUID4
+    student_count: int = 0
+
+    class Config:
+        from_attributes = True
+
+class BatchDetailResponse(BatchResponse):
+    students: List[StudentResponse] = []
+
+class BatchStudentsAdd(BaseModel):
+    student_ids: List[UUID4]
+
+
+
+class BatchSummary(BaseModel):
+    id: UUID4
+    name: str
+    start_time: time
+    end_time: time
+
+    class Config:
+        from_attributes = True
+
+class StudentDetailResponse(StudentResponse):
+    batches: List[BatchSummary] = []

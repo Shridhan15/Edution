@@ -1,5 +1,7 @@
 import { useRef } from "react";
+import { Link } from "react-router-dom";
 import { useUploadStudentPhoto } from "../../hooks/useStudents";
+import { formatTime } from "../batch/BatchCard";
 
 export default function StudentHeader({ student, className, onEditClick }) {
   const fileInputRef = useRef(null);
@@ -20,12 +22,12 @@ export default function StudentHeader({ student, className, onEditClick }) {
     const file = e.target.files?.[0];
     if (!file) return;
     uploadPhoto(file);
-    e.target.value = ""; // Reset input so the same file can be re-selected if needed
+    e.target.value = "";
   };
 
   return (
     <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-5">
           {/* Interactive Avatar */}
           <div
@@ -43,7 +45,6 @@ export default function StudentHeader({ student, className, onEditClick }) {
               initials
             )}
 
-            {/* Hover / Uploading Overlay */}
             <div
               className={`absolute inset-0 bg-black/50 flex items-center justify-center text-xs font-medium text-white transition-opacity ${
                 isPending ? "opacity-100" : "opacity-0 group-hover:opacity-100"
@@ -82,12 +83,33 @@ export default function StudentHeader({ student, className, onEditClick }) {
               <span>•</span>
               <span>Joined {student.joining_date}</span>
             </div>
+
+            {/* Assigned Batches */}
+            <div className="mt-2.5 flex flex-wrap items-center gap-2">
+              {student.batches && student.batches.length > 0 ? (
+                student.batches.map((batch) => (
+                  <Link
+                    key={batch.id}
+                    to={`/batches/${batch.id}`}
+                    className="inline-flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1 text-xs font-medium text-blue-700 hover:bg-blue-100 transition-colors"
+                  >
+                    <span>🕒 {batch.name}</span>
+                    <span className="text-blue-400">
+                      ({formatTime(batch.start_time)} –{" "}
+                      {formatTime(batch.end_time)})
+                    </span>
+                  </Link>
+                ))
+              ) : (
+                <span className="text-xs text-gray-400">No batch assigned</span>
+              )}
+            </div>
           </div>
         </div>
 
         <button
           onClick={onEditClick}
-          className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+          className="rounded-lg border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors shrink-0"
         >
           Edit Profile
         </button>
