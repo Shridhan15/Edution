@@ -1,7 +1,7 @@
 # backend/schemas.py
 from pydantic import BaseModel, UUID4
 from datetime import date, datetime, time
-from typing import Optional, List
+from typing import List, Literal, Optional
 
 class StudentBase(BaseModel):
     full_name: str
@@ -129,3 +129,37 @@ class BatchSummary(BaseModel):
 
 class StudentDetailResponse(StudentResponse):
     batches: List[BatchSummary] = []
+
+
+
+
+
+
+class AttendanceRecordInput(BaseModel):
+    student_id: UUID4
+    status: Literal["PRESENT", "ABSENT", "LATE"]
+    remarks: Optional[str] = None
+
+class AttendanceBulkCreate(BaseModel):
+    batch_id: UUID4
+    date: date
+    records: List[AttendanceRecordInput]
+
+class AttendanceResponse(BaseModel):
+    id: UUID4
+    batch_id: UUID4
+    student_id: UUID4
+    date: date
+    status: str
+    remarks: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class StudentAttendanceSummary(BaseModel):
+    total_days: int
+    present_days: int
+    absent_days: int
+    late_days: int
+    attendance_percentage: float
+    records: List[AttendanceResponse]

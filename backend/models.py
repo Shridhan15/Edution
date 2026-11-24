@@ -1,5 +1,5 @@
 # backend/models.py
-from sqlalchemy import Column, String, Integer, Numeric, Date, DateTime, ForeignKey, text, JSON, Time
+from sqlalchemy import Column, String, Integer, Numeric, Date, DateTime, ForeignKey, text, JSON, Time,UniqueConstraint
 from sqlalchemy.dialects.postgresql import UUID, ARRAY
 from sqlalchemy.orm import relationship
 from database import Base
@@ -89,3 +89,21 @@ class BatchStudent(Base):
     batch_id = Column(UUID(as_uuid=True), ForeignKey("batches.id", ondelete="CASCADE"), primary_key=True)
     student_id = Column(UUID(as_uuid=True), ForeignKey("students.id", ondelete="CASCADE"), primary_key=True)
     joined_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
+
+
+
+
+class Attendance(Base):
+    __tablename__ = "attendance"
+    __table_args__ = (
+        UniqueConstraint("batch_id", "student_id", "date", name="uq_attendance_batch_student_date"),
+    )
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=text("uuid_generate_v4()"))
+    organization_id = Column(UUID(as_uuid=True), ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False)
+    batch_id = Column(UUID(as_uuid=True), ForeignKey("batches.id", ondelete="CASCADE"), nullable=False)
+    student_id = Column(UUID(as_uuid=True), ForeignKey("students.id", ondelete="CASCADE"), nullable=False)
+    date = Column(Date, nullable=False)
+    status = Column(String(20), nullable=False)
+    remarks = Column(String, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))

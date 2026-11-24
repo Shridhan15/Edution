@@ -41,7 +41,7 @@ export default function StudentProfile() {
           <StudentContactCard student={student} />
         </div>
         <div className="lg:col-span-2">
-          <StudentTimeline />
+          <StudentTimeline studentId={student.id} batches={student.batches} />
         </div>
       </div>
 
