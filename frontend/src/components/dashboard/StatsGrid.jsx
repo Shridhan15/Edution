@@ -3,6 +3,7 @@ export default function StatsGrid({
   activeStudents,
   totalClasses,
   totalSubjects,
+  totalBatches,
 }) {
   const inactiveStudents = totalStudents - activeStudents;
 
@@ -26,10 +27,9 @@ export default function StatsGrid({
       subtext: "Structured in curriculum",
     },
     {
-      label: "Today's Attendance",
-      value: "—",
-      subtext: "Attendance module coming soon",
-      muted: true,
+      label: "Active Batches",
+      value: totalBatches,
+      subtext: "Scheduled time slots",
     },
   ];
 
@@ -43,13 +43,7 @@ export default function StatsGrid({
           <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
             {card.label}
           </p>
-          <p
-            className={`mt-2 text-3xl font-bold ${
-              card.muted ? "text-gray-300" : "text-gray-900"
-            }`}
-          >
-            {card.value}
-          </p>
+          <p className="mt-2 text-3xl font-bold text-gray-900">{card.value}</p>
           <p className="mt-1 text-xs text-gray-500">{card.subtext}</p>
         </div>
       ))}

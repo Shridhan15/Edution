@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import { useStudents } from "../hooks/useStudents";
 import { useClasses } from "../hooks/useCurriculum";
+import { useBatches } from "../hooks/useBatches";
 import AddStudentModal from "../components/AddStudentModal";
 import DashboardHeader from "../components/dashboard/DashboardHeader";
 import StatsGrid from "../components/dashboard/StatsGrid";
@@ -22,6 +23,12 @@ export default function Dashboard() {
     error: classesError,
   } = useClasses();
 
+  const {
+    data: batches = [],
+    isLoading: batchesLoading,
+    error: batchesError,
+  } = useBatches();
+
   const classMap = useMemo(
     () => Object.fromEntries(classes.map((cls) => [cls.id, cls.name])),
     [classes],
@@ -38,8 +45,9 @@ export default function Dashboard() {
       activeStudents,
       totalClasses: classes.length,
       totalSubjects,
+      totalBatches: batches.length,
     };
-  }, [students, classes]);
+  }, [students, classes, batches]);
 
   const recentStudents = useMemo(() => {
     return [...students]
@@ -47,14 +55,15 @@ export default function Dashboard() {
       .slice(0, 5);
   }, [students]);
 
-  if (studentsLoading || classesLoading) {
+  if (studentsLoading || classesLoading || batchesLoading) {
     return <div className="p-8 text-gray-500">Loading dashboard...</div>;
   }
 
-  if (studentsError || classesError) {
+  if (studentsError || classesError || batchesError) {
     return (
       <div className="p-8 text-red-500">
-        Error loading dashboard: {(studentsError || classesError).message}
+        Error loading dashboard:{" "}
+        {(studentsError || classesError || batchesError).message}
       </div>
     );
   }
