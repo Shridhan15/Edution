@@ -163,3 +163,27 @@ class StudentAttendanceSummary(BaseModel):
     late_days: int
     attendance_percentage: float
     records: List[AttendanceResponse]
+
+
+
+# --- MATERIALS ---
+class MaterialTopic(BaseModel):
+    title: str
+    page: Optional[int] = None
+    subtopics: List[str] = []
+
+class MaterialResponse(BaseModel):
+    id: UUID4
+    chapter_id: UUID4
+    title: str
+    file_name: str
+    file_url: str
+    file_size_bytes: Optional[int] = None
+    page_count: Optional[int] = None
+    processing_status: str
+    extracted_topics: List[MaterialTopic] = []
+    error_message: Optional[str] = None
+    created_at: datetime
+
+    class Config:
+        from_attributes = True

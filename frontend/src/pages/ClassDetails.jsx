@@ -7,13 +7,15 @@ import {
   useChapters,
   useCreateChapter,
 } from "../hooks/useCurriculum";
+import ChapterMaterials from "../components/curriculum/ChapterMaterials";
 
-function SubjectCard({ subject }) {
+function SubjectRow({ subject }) {
   const { data: chapters = [], isLoading } = useChapters(subject.id);
   const { mutateAsync: addChapter, isPending } = useCreateChapter(subject.id);
 
   const [newChapterName, setNewChapterName] = useState("");
   const [isAdding, setIsAdding] = useState(false);
+  const [expandedChapterId, setExpandedChapterId] = useState(null);
 
   const handleAddChapter = async (e) => {
     e.preventDefault();
@@ -28,86 +30,122 @@ function SubjectCard({ subject }) {
     setIsAdding(false);
   };
 
+  const toggleChapter = (chapterId) => {
+    setExpandedChapterId((prev) => (prev === chapterId ? null : chapterId));
+  };
+
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-      <div className="bg-gray-50 border-b border-gray-100 p-4 flex justify-between items-center">
-        <h3 className="text-lg font-bold text-gray-800">{subject.name}</h3>
-        <span className="text-xs font-medium text-gray-500 bg-gray-200 px-2 py-1 rounded-full">
-          {chapters.length} Chapters
-        </span>
+    <div className="w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-xs">
+      {/* Subject Header Bar */}
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-gray-100 bg-gray-50/80 px-6 py-4">
+        <div className="flex items-center gap-3">
+          <h3 className="text-lg font-bold text-gray-900">{subject.name}</h3>
+          <span className="rounded-full bg-gray-200/80 px-2.5 py-0.5 text-xs font-medium text-gray-600">
+            {chapters.length} {chapters.length === 1 ? "Chapter" : "Chapters"}
+          </span>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setIsAdding((prev) => !prev)}
+          className="rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+        >
+          {isAdding ? "Cancel" : "+ Add Chapter"}
+        </button>
       </div>
 
-      <div className="p-4 space-y-2">
-        {isLoading && (
-          <p className="text-sm text-gray-400 text-center py-2">
-            Loading chapters...
-          </p>
-        )}
-        {!isLoading && chapters.length === 0 && !isAdding && (
-          <p className="text-sm text-gray-400 text-center py-2">
-            No chapters yet.
-          </p>
-        )}
-
-        {chapters.map((chap) => (
-          <div
-            key={chap.id}
-            className="group flex justify-between items-center p-3 hover:bg-gray-50 rounded-lg border border-transparent hover:border-gray-100 transition-all"
-          >
-            <div className="flex items-center gap-3">
-              <span className="text-gray-400 font-mono text-sm">
-                {chap.chapter_number}.
-              </span>
-              <span className="text-gray-700 font-medium text-sm">
-                {chap.name}
-              </span>
-            </div>
-
-            <button className="opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1 text-xs text-blue-600 hover:text-blue-800 bg-blue-50 px-2 py-1 rounded">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
-                />
-              </svg>
-              Add Material
-            </button>
-          </div>
-        ))}
-
-        {isAdding ? (
-          <form onSubmit={handleAddChapter} className="flex gap-2 mt-2">
-            <input
-              type="text"
-              autoFocus
-              placeholder="Chapter name..."
-              className="flex-1 text-sm rounded-lg border border-gray-300 p-2 outline-none focus:border-slate-900"
-              value={newChapterName}
-              onChange={(e) => setNewChapterName(e.target.value)}
-            />
-            <button
-              type="submit"
-              disabled={isPending}
-              className="bg-slate-900 text-white px-3 py-2 text-sm rounded-lg hover:bg-slate-800 disabled:opacity-50"
-            >
-              {isPending ? "..." : "Save"}
-            </button>
-          </form>
-        ) : (
+      {/* Inline Add Chapter Form */}
+      {isAdding && (
+        <form
+          onSubmit={handleAddChapter}
+          className="flex items-center gap-3 border-b border-gray-100 bg-blue-50/30 px-6 py-3"
+        >
+          <input
+            type="text"
+            autoFocus
+            placeholder="Enter chapter name..."
+            className="flex-1 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm outline-none focus:border-slate-900"
+            value={newChapterName}
+            onChange={(e) => setNewChapterName(e.target.value)}
+          />
           <button
-            onClick={() => setIsAdding(true)}
-            className="text-sm text-gray-500 hover:text-slate-900 mt-2 flex items-center gap-1"
+            type="submit"
+            disabled={isPending}
+            className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800 disabled:opacity-50"
           >
-            + Add Chapter
+            {isPending ? "Saving..." : "Save Chapter"}
           </button>
+        </form>
+      )}
+
+      {/* Chapters List */}
+      <div className="divide-y divide-gray-100">
+        {isLoading ? (
+          <p className="px-6 py-6 text-sm text-gray-400">Loading chapters...</p>
+        ) : chapters.length === 0 ? (
+          <p className="px-6 py-8 text-center text-sm text-gray-400">
+            No chapters yet. Click "+ Add Chapter" to get started.
+          </p>
+        ) : (
+          chapters.map((chap) => {
+            const isExpanded = expandedChapterId === chap.id;
+
+            return (
+              <div key={chap.id} className={isExpanded ? "bg-gray-50/40" : ""}>
+                <div
+                  onClick={() => toggleChapter(chap.id)}
+                  className="group flex cursor-pointer items-center justify-between px-6 py-4 hover:bg-gray-50/80 transition-colors"
+                >
+                  <div className="flex items-center gap-4 min-w-0">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-gray-100 font-mono text-xs font-semibold text-gray-500">
+                      {chap.chapter_number}
+                    </span>
+                    <span className="truncate text-sm font-semibold text-gray-800">
+                      {chap.name}
+                    </span>
+                  </div>
+
+                  <button
+                    type="button"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      toggleChapter(chap.id);
+                    }}
+                    className={`flex shrink-0 items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors ${
+                      isExpanded
+                        ? "bg-slate-900 text-white"
+                        : "bg-blue-50 text-blue-700 hover:bg-blue-100"
+                    }`}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-3.5 w-3.5"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
+                      />
+                    </svg>
+                    {isExpanded ? "Hide Materials" : "Materials"}
+                  </button>
+                </div>
+
+                {isExpanded && (
+                  <div className="px-6 pb-5">
+                    <ChapterMaterials
+                      chapterId={chap.id}
+                      chapterName={chap.name}
+                    />
+                  </div>
+                )}
+              </div>
+            );
+          })
         )}
       </div>
     </div>
@@ -136,7 +174,7 @@ export default function ClassDetails() {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-8 max-w-6xl mx-auto">
       <div className="mb-8">
         <Link
           to="/curriculum"
@@ -148,7 +186,7 @@ export default function ClassDetails() {
           <h1 className="text-3xl font-bold text-gray-800">{className}</h1>
           <button
             onClick={() => setIsAddingSubject(!isAddingSubject)}
-            className="bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors"
+            className="bg-slate-900 text-white px-4 py-2 rounded-lg hover:bg-slate-800 transition-colors text-sm font-medium"
           >
             {isAddingSubject ? "Cancel" : "+ Add Subject"}
           </button>
@@ -158,20 +196,20 @@ export default function ClassDetails() {
       {isAddingSubject && (
         <form
           onSubmit={handleAddSubject}
-          className="mb-6 bg-white p-4 rounded-xl shadow-sm border border-gray-100 flex gap-4"
+          className="mb-6 bg-white p-4 rounded-xl shadow-xs border border-gray-200 flex gap-4"
         >
           <input
             type="text"
             autoFocus
             placeholder="e.g. Mathematics, Science..."
-            className="flex-1 rounded-lg border border-gray-300 p-2 outline-none focus:border-slate-900"
+            className="flex-1 rounded-lg border border-gray-300 px-3 py-2 text-sm outline-none focus:border-slate-900"
             value={newSubjectName}
             onChange={(e) => setNewSubjectName(e.target.value)}
           />
           <button
             type="submit"
             disabled={isPending}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 disabled:opacity-50"
+            className="bg-blue-600 text-white px-6 py-2 rounded-lg text-sm font-medium hover:bg-blue-700 disabled:opacity-50"
           >
             {isPending ? "Saving..." : "Save Subject"}
           </button>
@@ -181,13 +219,13 @@ export default function ClassDetails() {
       {isLoading ? (
         <div className="text-gray-500">Loading subjects...</div>
       ) : subjects.length === 0 && !isAddingSubject ? (
-        <div className="text-center text-gray-500 py-10 bg-white rounded-xl border border-gray-100">
+        <div className="text-center text-gray-500 py-12 bg-white rounded-xl border border-gray-200">
           No subjects found for this class. Click "+ Add Subject" to start.
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="space-y-6">
           {subjects.map((sub) => (
-            <SubjectCard key={sub.id} subject={sub} />
+            <SubjectRow key={sub.id} subject={sub} />
           ))}
         </div>
       )}

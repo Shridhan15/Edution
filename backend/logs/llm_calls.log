@@ -1,0 +1,195 @@
+================================================================================
+TIME          : 2026-11-26 15:25:39
+SOURCE        : material_service.structure_headings (material_id=bf964be5-308f-45cb-ad92-92b76db8824b)
+MODEL         : openai/gpt-oss-120b
+STATUS        : SUCCESS
+LATENCY       : 9393.3 ms (9.39 s)
+TOKENS        : input=5792 | output=1580 | total=7372
+--------------------------------------------------------------------------------
+[USER QUERY / PROMPT]
+Clean this list of raw PDF heading candidates using their font size, bold, and numbering cues. Remove noise (standalone chapter numbers, running headers, 'EXERCISES', figure/table labels). Group subheadings under their parent main headings. Return ONLY valid JSON:
+{"topics": [{"title": "Main Heading", "page": 1, "subtopics": ["Subheading 1", "Subheading 2"]}]}
+
+Raw candidates:
+[Page 1] [Font 28.0pt] [Bold True] [Numbered False] Atmosphere and
+[Page 1] [Font 28.0pt] [Bold True] [Numbered False] Climate
+[Page 1] [Font 24.0pt] [Bold True] [Numbered False] Chapter 3
+[Page 1] [Font 18.0pt] [Bold True] [Numbered False] The Big Questions
+[Page 1] [Font 12.0pt] [Bold True] [Numbered False] atmosphere. It is pulled down around the Earth by gravity, and
+[Page 1] [Font 12.0pt] [Bold True] [Numbered False] THINK ABOUT IT
+[Page 1] [Font 10.5pt] [Bold True] [Numbered False] Gravity:
+[Page 2] [Font 17.0pt] [Bold True] [Numbered False] Composition and Structure of
+[Page 2] [Font 17.0pt] [Bold True] [Numbered False] the Atmosphere
+[Page 2] [Font 15.0pt] [Bold True] [Numbered False] Composition of the Atmosphere
+[Page 2] [Font 12.0pt] [Bold True] [Numbered False] LET’S RECALL
+[Page 2] [Font 15.0pt] [Bold True] [Numbered False] Structure of the Atmosphere
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] THERMOSPHERE
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] Aeroplane
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] Mesopause
+[Page 3] [Font 9.0pt] [Bold True] [Numbered False] This line represents
+[Page 3] [Font 9.0pt] [Bold True] [Numbered False] variation in
+[Page 3] [Font 9.0pt] [Bold True] [Numbered False] temperature with
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] Tropopause
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] EXOSPHERE
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] STRATOSPHERE
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] Stratopause
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] MESOSPHERE
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] TROPOSPHERE
+[Page 3] [Font 12.0pt] [Bold True] [Numbered False] decreases with altitude. The major layers extending from the Earth’s
+[Page 3] [Font 10.5pt] [Bold True] [Numbered False] Altitude:
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] OZONE
+[Page 3] [Font 11.0pt] [Bold True] [Numbered False] Troposphere: The troposphere is the most important layer of
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] Aurora
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] Satellite
+[Page 3] [Font 10.0pt] [Bold True] [Numbered False] Meteors
+[Page 4] [Font 11.0pt] [Bold True] [Numbered False] Mesosphere: Above the stratosphere lies the third layer of the
+[Page 4] [Font 11.0pt] [Bold True] [Numbered False] Thermosphere: In the thermosphere, temperature rises very
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] Exosphere: The uppermost layer of the atmosphere is known
+[Page 5] [Font 17.0pt] [Bold True] [Numbered False] Weather and Climate
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] The term weather refers to the hour-to-hour and day-to-day
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] period of time refer to the climate of the place. Climate refers to the
+[Page 5] [Font 15.0pt] [Bold True] [Numbered False] Elements of Weather and Climate
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] Temperature: The temperature of the atmosphere varies not
+[Page 5] [Font 12.0pt] [Bold True] [Numbered False] affecting temperature distribution is insolation. The amount of
+[Page 5] [Font 10.5pt] [Bold True] [Numbered False] Insolation:
+[Page 6] [Font 11.0pt] [Bold True] [Numbered False] Humidity: When water evaporates from land and different
+[Page 6] [Font 11.0pt] [Bold True] [Numbered False] Precipitation: It occurs when a part of the atmosphere becomes
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] Equator
+[Page 6] [Font 9.0pt] [Bold True] [Numbered False] North Temperate Zone
+[Page 6] [Font 9.0pt] [Bold True] [Numbered False] Torrid Zone
+[Page 6] [Font 9.0pt] [Bold True] [Numbered False] South Temperate Zone
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] 23½°N
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] 23½°S
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] 66½°S
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] 66½°N
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] Arctic
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] Circle
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] Tropic of
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] Cancer
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] Capricorn
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] Antarctic
+[Page 6] [Font 10.0pt] [Bold True] [Numbered False] Sun’s rays
+[Page 7] [Font 11.0pt] [Bold True] [Numbered False] Atmospheric pressure: The pressure exerted by the weight of air
+[Page 7] [Font 11.0pt] [Bold True] [Numbered False] Wind: The movement of air from a high-pressure area to a
+[Page 7] [Font 12.0pt] [Bold True] [Numbered False] THINK ABOUT IT
+[Page 8] [Font 12.0pt] [Bold True] [Numbered False] LET’S EXPLORE
+[Page 8] [Font 9.0pt] [Bold True] [Numbered False] Night
+[Page 8] [Font 10.0pt] [Bold True] [Numbered False] Sea
+[Page 8] [Font 10.0pt] [Bold True] [Numbered False] Land
+[Page 8] [Font 10.0pt] [Bold True] [Numbered False] Land breeze
+[Page 8] [Font 10.0pt] [Bold True] [Numbered False] Sea breeze
+[Page 8] [Font 9.0pt] [Bold True] [Numbered False] Day
+[Page 9] [Font 12.0pt] [Bold True] [Numbered False] LET’S ANALYSE
+[Page 9] [Font 17.0pt] [Bold True] [Numbered False] Seasons in India
+[Page 9] [Font 11.0pt] [Bold True] [Numbered False] Winter: The winter season generally lasts from December to
+[Page 9] [Font 11.0pt] [Bold True] [Numbered False] Summer or pre-monsoon: The summer or pre-monsoon season
+[Page 9] [Font 11.0pt] [Bold True] [Numbered False] Monsoon or rainy (Advancing monsoon): The monsoon
+[Page 9] [Font 11.0pt] [Bold True] [Numbered False] Post-monsoon (Retreating monsoon): The post-monsoon
+[Page 10] [Font 11.0pt] [Bold True] [Numbered False] (Ṛtu)
+[Page 10] [Font 12.0pt] [Bold True] [Numbered False] THINK ABOUT IT
+[Page 11] [Font 15.0pt] [Bold True] [Numbered False] Monsoon
+[Page 11] [Font 12.0pt] [Bold True] [Numbered False] The climate of India is strongly influenced by monsoon winds. The
+[Page 11] [Font 12.0pt] [Bold True] [Numbered False] considered lunar mansions (nakṣhatras) in predicting seasonal
+[Page 11] [Font 10.5pt] [Bold True] [Numbered False] Monsoon:
+[Page 11] [Font 10.5pt] [Bold True] [Numbered False] Lunar
+[Page 11] [Font 10.5pt] [Bold True] [Numbered False] Mansions
+[Page 11] [Font 10.5pt] [Bold True] [Numbered False] (nakṣhatras):
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 22 May
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 26 May
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 1 June
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 5 June
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 500 km
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 10 June
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 15 June
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 20 June
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 25 June
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 30 June
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 5 July
+[Page 12] [Font 9.0pt] [Bold False] [Numbered True] 8 July
+[Page 13] [Font 9.0pt] [Bold False] [Numbered True] 500 km
+[Page 13] [Font 9.0pt] [Bold False] [Numbered True] 15 Oct
+[Page 13] [Font 9.0pt] [Bold False] [Numbered True] 10 Oct
+[Page 13] [Font 9.0pt] [Bold False] [Numbered True] 30 Sep
+[Page 13] [Font 9.0pt] [Bold False] [Numbered True] 25 Sep
+[Page 13] [Font 9.0pt] [Bold False] [Numbered True] 20 Sep
+[Page 13] [Font 9.0pt] [Bold False] [Numbered True] 17 Sep
+[Page 13] [Font 9.0pt] [Bold False] [Numbered True] 5 Oct
+[Page 14] [Font 12.0pt] [Bold True] [Numbered False] LET’S EXPLORE
+[Page 15] [Font 17.0pt] [Bold True] [Numbered False] Climate Change
+[Page 15] [Font 12.0pt] [Bold True] [Numbered False] this issue requires collective efforts—reducing carbon footprints,
+[Page 15] [Font 12.0pt] [Bold True] [Numbered False] LET’S EXPLORE
+[Page 15] [Font 12.0pt] [Bold True] [Numbered False] My Carbon Footprint
+[Page 15] [Font 11.0pt] [Bold True] [Numbered False] Step 1: My Daily Habits
+[Page 15] [Font 11.0pt] [Bold True] [Numbered False] Transport
+[Page 15] [Font 11.0pt] [Bold True] [Numbered False] Electricity Use
+[Page 15] [Font 11.0pt] [Bold True] [Numbered False] Water Use
+[Page 15] [Font 10.5pt] [Bold True] [Numbered False] Carbon
+[Page 15] [Font 10.5pt] [Bold True] [Numbered False] footprint:
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] Waste and Plastics
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] Step 2: Score Yourself
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] Low impact choices = 1 point
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] Medium impact choices = 2 points
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] High impact choices = 3 points
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] Very high impact choices = 4 points
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] Step 3: My Climate Action Pledge
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] Think about two simple changes you can make to reduce your
+[Page 16] [Font 17.0pt] [Bold True] [Numbered False] Punjab Floods 2025: A Case Study
+[Page 17] [Font 15.0pt] [Bold True] [Numbered False] Causes
+[Page 17] [Font 11.0pt] [Bold True] [Numbered False] Natural Causes: In 2025, Punjab faced very heavy monsoon
+[Page 17] [Font 11.0pt] [Bold True] [Numbered False] Human-made Causes: The floods were further aggravated by
+[Page 18] [Font 15.0pt] [Bold True] [Numbered False] Effects of the Floods in Punjab
+[Page 18] [Font 15.0pt] [Bold True] [Numbered False] Classroom Discussion
+[Page 18] [Font 15.0pt] [Bold True] [Numbered False] Before we move on...
+[Page 19] [Font 15.0pt] [Bold True] [Numbered False] Questions and activities
+[Page 19] [Font 11.0pt] [Bold False] [Numbered True] a. The troposphere and stratosphere
+[Page 19] [Font 11.0pt] [Bold False] [Numbered True] b. The south-west monsoon and north-east monsoon
+[Page 19] [Font 11.0pt] [Bold False] [Numbered True] 7.1. Now look at Table 3.3 again. Re-arrange the 10 stations
+[Page 19] [Font 11.0pt] [Bold False] [Numbered True] 7.2 Find out:
+[Page 19] [Font 11.0pt] [Bold False] [Numbered True] c. The two hottest stations in the months of
+[Page 19] [Font 11.0pt] [Bold False] [Numbered True] 7.3. Now find out:
+[Page 19] [Font 11.0pt] [Bold False] [Numbered True] a. Why
+[Page 19] [Font 11.0pt] [Bold False] [Numbered True] b. Why does Delhi receive more rainfall than Jodhpur?
+[Page 20] [Font 11.0pt] [Bold False] [Numbered True] 7.4. Now think why
+[Page 20] [Font 11.0pt] [Bold False] [Numbered True] a. Thiruvananthapuram has an equable climate?
+[Page 20] [Font 11.0pt] [Bold False] [Numbered True] b. Chennai has more rainfall only after the fury of the
+[Page 20] [Font 11.0pt] [Bold False] [Numbered True] c. Leh has moderate precipitation almost throughout
+[Page 20] [Font 9.0pt] [Bold True] [Numbered False] Bengaluru
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 20.5 22.7 25.2 27.1 26.7 24.2 23.0 23.0 23.1 22.9 18.9 20.2
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 4.5 10.7 7.1 11.1 13.7 16.4 15.3 6.1
+[Page 20] [Font 9.0pt] [Bold True] [Numbered False] Mumbai
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 24.4 24.4 26.7 28.3 30.0 28.9 27.2 27.2 27.2 27.8 27.2 25.0
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 1.8 50.6 61.0 36.9 26.9 4.8
+[Page 20] [Font 9.0pt] [Bold True] [Numbered False] Kolkata
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 19.6 22.0 27.1 30.1 30.4 29.9 28.9 28.7 28.9 27.6 23.4 19.7
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 5.1 13.4 29.0 33.1 33.4 25.3 12.7 2.7
+[Page 20] [Font 9.0pt] [Bold True] [Numbered False] Delhi
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 14.4 16.7 23.3 30.0 33.3 33.3 30.0 29.4 28.9 25.6 19.4 15.6
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 7.4 19.3 17.8 11.9 1.3
+[Page 20] [Font 9.0pt] [Bold True] [Numbered False] Jodhpur
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 16.8 19.2 26.6 29.8 33.3 33.9 31.3 29.0 20.1 27.0 20.1 14.9
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 3.1 10.8 13.1 5.7
+[Page 20] [Font 9.0pt] [Bold True] [Numbered False] Chennai
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 24.5 25.7 27.7 30.4 33.0 32.5 31.0 30.2 29.8 28.0 25.9 24.7
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 8.7 11.3 11.9 30.6 35.0 13.9 128.6
+[Page 20] [Font 9.0pt] [Bold True] [Numbered False] Nagpur
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 21.5 23.9 28.3 32.7 35.5 32.0 27.7 27.3 27.9 26.7 23.1 20.7
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 2.1 22.2 37.6 28.6 18.5 5.5
+[Page 20] [Font 9.0pt] [Bold True] [Numbered False] Shillong
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 9.8 11.3 15.9 18.5 19.2 20.5 21.1 20.9 20.0 17.2 13.3 10.4
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 5.6 14.6 29.5 47.6 35.9 34.3 30.2 18.8 3.8
+[Page 20] [Font 9.0pt] [Bold True] [Numbered False] Thiruvananthapuram
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 26.7 27.3 28.3 28.7 28.6 26.6 26.2 26.2 26.5 26.7 26.6 26.5
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 3.7 10.6 20.8 35.6 22.3 14.6 13.8 27.3 20.6 7.5
+[Page 20] [Font 9.0pt] [Bold True] [Numbered False] Leh
+[Page 20] [Font 9.0pt] [Bold False] [Numbered True] 6.1 10.0 14.4 17.2 16.1 12.2 6.1
+[Page 21] [Font 7.3pt] [Bold True] [Numbered False] Jan Feb Mar Apr May Jun
+[Page 21] [Font 7.3pt] [Bold True] [Numbered False] Jul Aug Sep Oct Nov Dec
+[Page 21] [Font 9.0pt] [Bold True] [Numbered False] Temperature (oCelsius)
+[Page 21] [Font 9.0pt] [Bold True] [Numbered False] Rainfall (Centimetres)
+[Page 21] [Font 11.0pt] [Bold False] [Numbered True] 7.5. Despite these differences across regions, can you observe
+[Page 22] [Font 15.0pt] [Bold True] [Numbered False] Notes
+
+[RESPONSE]
+{"topics":[{"title":"Atmosphere and Climate","page":1,"subtopics":["The Big Questions","Thermosphere","Mesopause","Tropopause","Exosphere","Stratosphere","Stratopause","Mesosphere","Troposphere","Ozone","Aurora","Satellite","Meteors","Altitude"]},{"title":"Composition and Structure of the Atmosphere","page":2,"subtopics":["Composition of the Atmosphere","Structure of the Atmosphere"]},{"title":"Weather and Climate","page":5,"subtopics":["Elements of Weather and Climate","Temperature","Insolation","Humidity","Precipitation","Atmospheric pressure","Wind"]},{"title":"Seasons in India","page":9,"subtopics":["Winter","Summer or pre-monsoon","Monsoon or rainy (Advancing monsoon)","Post-monsoon (Retreating monsoon)"]},{"title":"Monsoon","page":11,"subtopics":["Monsoon","Lunar Mansions (nakṣhatras)"]},{"title":"Climate Change","page":15,"subtopics":["My Carbon Footprint","Step 1: My Daily Habits","Transport","Electricity Use","Water Use","Carbon footprint","Waste and Plastics","Step 2: Score Yourself","Step 3: My Climate Action Pledge"]},{"title":"Punjab Floods 2025: A Case Study","page":16,"subtopics":["Causes","Natural Causes","Human-made Causes","Effects of the Floods in Punjab","Classroom Discussion","Before we move on...","Questions and activities"]},{"title":"Notes","page":22,"subtopics":[]}]}
+
+================================================================================

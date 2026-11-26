@@ -1,8 +1,10 @@
 # backend/models.py
 from sqlalchemy import Column, String, Integer, Numeric, Date, DateTime, ForeignKey, text, JSON, Time,UniqueConstraint
-from sqlalchemy.dialects.postgresql import UUID, ARRAY
+from sqlalchemy.dialects.postgresql import UUID, ARRAY,JSONB
 from sqlalchemy.orm import relationship
 from database import Base
+
+ 
 
 class Organization(Base):
     __tablename__ = "organizations"
@@ -106,4 +108,23 @@ class Attendance(Base):
     date = Column(Date, nullable=False)
     status = Column(String(20), nullable=False)
     remarks = Column(String, nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
+
+
+
+
+class Material(Base):
+    __tablename__ = "materials"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=text("uuid_generate_v4()"))
+    organization_id = Column(UUID(as_uuid=True), ForeignKey("organizations.id", ondelete="CASCADE"), nullable=False)
+    chapter_id = Column(UUID(as_uuid=True), ForeignKey("chapters.id", ondelete="CASCADE"), nullable=False)
+    title = Column(String(200), nullable=False)
+    file_name = Column(String(255), nullable=False)
+    file_url = Column(String, nullable=False)
+    file_size_bytes = Column(Integer, nullable=True)
+    page_count = Column(Integer, nullable=True)
+    processing_status = Column(String(20), nullable=False, default="PROCESSING")
+    extracted_topics = Column(JSONB, nullable=False, server_default=text("'[]'::jsonb"))
+    error_message = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
