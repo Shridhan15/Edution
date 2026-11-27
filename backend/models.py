@@ -128,3 +128,16 @@ class Material(Base):
     extracted_topics = Column(JSONB, nullable=False, server_default=text("'[]'::jsonb"))
     error_message = Column(String, nullable=True)
     created_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
+
+
+class BatchMaterial(Base):
+    __tablename__ = "batch_materials"
+    __table_args__ = (
+        UniqueConstraint("batch_id", "material_id", name="batch_materials_unique"),
+    )
+
+    id = Column(UUID(as_uuid=True), primary_key=True, server_default=text("extensions.uuid_generate_v4()"))
+    batch_id = Column(UUID(as_uuid=True), ForeignKey("batches.id", ondelete="CASCADE"), nullable=False)
+    material_id = Column(UUID(as_uuid=True), ForeignKey("materials.id", ondelete="CASCADE"), nullable=False)
+    assigned_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
+    

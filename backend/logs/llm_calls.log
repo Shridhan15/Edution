@@ -193,3 +193,260 @@ Raw candidates:
 {"topics":[{"title":"Atmosphere and Climate","page":1,"subtopics":["The Big Questions","Thermosphere","Mesopause","Tropopause","Exosphere","Stratosphere","Stratopause","Mesosphere","Troposphere","Ozone","Aurora","Satellite","Meteors","Altitude"]},{"title":"Composition and Structure of the Atmosphere","page":2,"subtopics":["Composition of the Atmosphere","Structure of the Atmosphere"]},{"title":"Weather and Climate","page":5,"subtopics":["Elements of Weather and Climate","Temperature","Insolation","Humidity","Precipitation","Atmospheric pressure","Wind"]},{"title":"Seasons in India","page":9,"subtopics":["Winter","Summer or pre-monsoon","Monsoon or rainy (Advancing monsoon)","Post-monsoon (Retreating monsoon)"]},{"title":"Monsoon","page":11,"subtopics":["Monsoon","Lunar Mansions (nakṣhatras)"]},{"title":"Climate Change","page":15,"subtopics":["My Carbon Footprint","Step 1: My Daily Habits","Transport","Electricity Use","Water Use","Carbon footprint","Waste and Plastics","Step 2: Score Yourself","Step 3: My Climate Action Pledge"]},{"title":"Punjab Floods 2025: A Case Study","page":16,"subtopics":["Causes","Natural Causes","Human-made Causes","Effects of the Floods in Punjab","Classroom Discussion","Before we move on...","Questions and activities"]},{"title":"Notes","page":22,"subtopics":[]}]}
 
 ================================================================================
+================================================================================
+TIME          : 2026-11-27 11:25:57
+SOURCE        : material_service.structure_headings (material_id=ae36a53a-cb5c-4024-88f0-dddd9e9371e4)
+MODEL         : openai/gpt-oss-120b
+STATUS        : SUCCESS
+LATENCY       : 10813.0 ms (10.81 s)
+TOKENS        : input=3391 | output=2363 | total=5754
+--------------------------------------------------------------------------------
+[USER QUERY / PROMPT]
+Clean this list of raw PDF heading candidates using their font size, bold, and numbering cues. Remove noise (standalone chapter numbers, running headers, 'EXERCISES', figure/table labels). Group subheadings under their parent main headings. Return ONLY valid JSON:
+{"topics": [{"title": "Main Heading", "page": 1, "subtopics": ["Subheading 1", "Subheading 2"]}]}
+
+Raw candidates:
+[Page 1] [Font 24.0pt] [Bold True] [Numbered False] Chapter 6
+[Page 1] [Font 18.0pt] [Bold True] [Numbered False] The Big Questions
+[Page 1] [Font 12.0pt] [Bold True] [Numbered False] LET’S RECALL
+[Page 2] [Font 17.0pt] [Bold True] [Numbered False] Tracing Democratic Traditions from
+[Page 2] [Font 17.0pt] [Bold True] [Numbered False] Early Times
+[Page 4] [Font 17.0pt] [Bold True] [Numbered False] Principles of Democracy
+[Page 4] [Font 15.0pt] [Bold True] [Numbered False] Popular Sovereignty
+[Page 4] [Font 12.0pt] [Bold True] [Numbered False] THINK ABOUT IT
+[Page 5] [Font 15.0pt] [Bold True] [Numbered False] Rule of Law
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] society. It ensures equality before the law and equal protection of
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] the law, and establishes that no one is above the law. When laws are
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] violated, disputes are resolved in a court of law through procedures
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] established by law, not by force or personal influence. This prevents
+[Page 5] [Font 15.0pt] [Bold True] [Numbered False] Fundamental Rights
+[Page 5] [Font 10.5pt] [Bold True] [Numbered False] Equal protection of law: All
+[Page 5] [Font 10.5pt] [Bold True] [Numbered False] Procedure
+[Page 5] [Font 10.5pt] [Bold True] [Numbered False] established
+[Page 5] [Font 10.5pt] [Bold True] [Numbered False] by law:
+[Page 5] [Font 10.0pt] [Bold False] [Numbered True] 21 of the
+[Page 5] [Font 10.5pt] [Bold True] [Numbered False] Equality before law: Every
+[Page 6] [Font 15.0pt] [Bold True] [Numbered False] Separation of Powers
+[Page 6] [Font 11.0pt] [Bold True] [Numbered False] of the Constitution. Important initiatives, such as Public Interest
+[Page 6] [Font 11.0pt] [Bold True] [Numbered False] Litigation (PIL), have also been taken by the judiciary from time to
+[Page 6] [Font 12.0pt] [Bold True] [Numbered False] THINK ABOUT IT
+[Page 6] [Font 15.0pt] [Bold True] [Numbered False] Accountability and Transparency
+[Page 6] [Font 10.5pt] [Bold True] [Numbered False] Public
+[Page 6] [Font 10.5pt] [Bold True] [Numbered False] Interest
+[Page 6] [Font 10.5pt] [Bold True] [Numbered False] Litigation: A
+[Page 7] [Font 15.0pt] [Bold True] [Numbered False] Multi-Party System
+[Page 7] [Font 15.0pt] [Bold True] [Numbered False] Safeguarding the Rights of Vulnerable Groups
+[Page 7] [Font 12.0pt] [Bold True] [Numbered False] DON’T MISS OUT
+[Page 8] [Font 11.0pt] [Bold True] [Numbered False] Process
+[Page 8] [Font 11.0pt] [Bold True] [Numbered False] Institutions
+[Page 8] [Font 11.0pt] [Bold True] [Numbered False] Democratic values
+[Page 8] [Font 11.0pt] [Bold True] [Numbered False] Media, Civil Society
+[Page 8] [Font 10.5pt] [Bold True] [Numbered False] Civil Society:
+[Page 9] [Font 11.0pt] [Bold True] [Numbered False] Features of
+[Page 9] [Font 11.0pt] [Bold True] [Numbered False] Examples
+[Page 9] [Font 11.0pt] [Bold True] [Numbered False] Question Hour and the auditing
+[Page 9] [Font 10.5pt] [Bold True] [Numbered False] Question
+[Page 9] [Font 10.5pt] [Bold True] [Numbered False] Hour: The
+[Page 10] [Font 11.0pt] [Bold True] [Numbered False] Role of Media in Democracy
+[Page 10] [Font 10.5pt] [Bold True] [Numbered False] (Indirect Democracy)
+[Page 10] [Font 17.0pt] [Bold True] [Numbered False] Types of Democracy
+[Page 10] [Font 10.5pt] [Bold True] [Numbered False] Presidential Democracy
+[Page 10] [Font 10.5pt] [Bold True] [Numbered False] Parliamentary
+[Page 10] [Font 10.5pt] [Bold True] [Numbered False] Direct Democracy
+[Page 11] [Font 10.0pt] [Bold True] [Numbered False] Team A
+[Page 11] [Font 10.0pt] [Bold True] [Numbered False] Team C
+[Page 11] [Font 10.0pt] [Bold True] [Numbered False] Team B
+[Page 11] [Font 10.0pt] [Bold True] [Numbered False] Team D
+[Page 12] [Font 10.0pt] [Bold True] [Numbered False] Country
+[Page 12] [Font 10.0pt] [Bold True] [Numbered False] Type of
+[Page 12] [Font 10.0pt] [Bold True] [Numbered False] System of
+[Page 12] [Font 10.0pt] [Bold True] [Numbered False] Head of State
+[Page 12] [Font 10.0pt] [Bold True] [Numbered False] / Head of
+[Page 12] [Font 10.0pt] [Bold True] [Numbered False] Key Features
+[Page 12] [Font 9.0pt] [Bold True] [Numbered False] Federalism
+[Page 12] [Font 10.5pt] [Bold True] [Numbered False] Federalism:
+[Page 12] [Font 10.5pt] [Bold True] [Numbered False] Sovereignty:
+[Page 13] [Font 17.0pt] [Bold True] [Numbered False] Democracy in Practice: India’s Living
+[Page 13] [Font 12.0pt] [Bold True] [Numbered False] DON’T MISS OUT
+[Page 13] [Font 11.0pt] [Bold True] [Numbered False] Huge representation: On average, a Member of Parliament
+[Page 13] [Font 11.0pt] [Bold True] [Numbered False] Many languages, one election: Elections in India are
+[Page 13] [Font 11.0pt] [Bold True] [Numbered False] Over one million polling stations: More than one million
+[Page 13] [Font 11.0pt] [Bold True] [Numbered False] Thousands of political parties: India has over 2,800
+[Page 15] [Font 11.0pt] [Bold True] [Numbered False] Case Study: Democracy at the Grassroots in India
+[Page 15] [Font 11.0pt] [Bold True] [Numbered True] 1. Jethipura Gram Panchayat (Block Idar, Sabarkantha, Gujarat)
+[Page 15] [Font 11.0pt] [Bold True] [Numbered False] Development Through People’s Participation
+[Page 15] [Font 11.0pt] [Bold False] [Numbered True] 2019 for its exemplary performance. It not only ensured the
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] adequate quorum in Gram Sabhas, with active participation from
+[Page 16] [Font 11.0pt] [Bold True] [Numbered True] 2. South Manubankul Gram Panchayat, Rupaichari Block,
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] Tripura Tribal Areas Autonomous District Council, Tripura
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] Women-Friendly Panchayat
+[Page 16] [Font 10.5pt] [Bold True] [Numbered False] Quorum: The
+[Page 16] [Font 11.0pt] [Bold True] [Numbered False] community institutions, cooperatives, and trade unions often adopt
+[Page 16] [Font 10.5pt] [Bold True] [Numbered False] Cooperatives:
+[Page 17] [Font 11.0pt] [Bold True] [Numbered False] Women and the Right to Vote: The Indian Experience
+[Page 17] [Font 11.0pt] [Bold True] [Numbered False] Women’s Reservation in Local Bodies
+[Page 18] [Font 12.0pt] [Bold True] [Numbered False] DON’T MISS OUT
+[Page 18] [Font 12.0pt] [Bold True] [Numbered False] THINK ABOUT IT
+[Page 18] [Font 17.0pt] [Bold True] [Numbered False] Challenges to Democratic Practices in India
+[Page 18] [Font 10.5pt] [Bold True] [Numbered False] Legislation:
+[Page 19] [Font 11.0pt] [Bold True] [Numbered False] Emergency
+[Page 19] [Font 11.0pt] [Bold True] [Numbered False] The Emergency was lifted in 1977, and general elections were
+[Page 19] [Font 10.5pt] [Bold True] [Numbered False] Emergency:
+[Page 19] [Font 10.0pt] [Bold False] [Numbered True] 360 of the
+[Page 20] [Font 15.0pt] [Bold True] [Numbered False] Democracy and You
+[Page 20] [Font 10.5pt] [Bold True] [Numbered False] Civic
+[Page 20] [Font 10.5pt] [Bold True] [Numbered False] responsibility:
+[Page 21] [Font 12.0pt] [Bold True] [Numbered False] THINK, DISCUSS, ACT
+[Page 21] [Font 11.0pt] [Bold True] [Numbered False] Think: How do your actions as a student contribute to your school
+[Page 21] [Font 11.0pt] [Bold True] [Numbered False] Discuss: Talk to your classmates about a social or community issue
+[Page 21] [Font 11.0pt] [Bold True] [Numbered False] Act: Choose one activity to fulfil your civic responsibility this
+[Page 21] [Font 15.0pt] [Bold True] [Numbered False] Before we move on...
+[Page 22] [Font 15.0pt] [Bold True] [Numbered False] Questions and activities
+[Page 22] [Font 11.0pt] [Bold False] [Numbered True] a. Which democratic values are reflected in this situation?
+[Page 22] [Font 11.0pt] [Bold False] [Numbered True] b. How does voting help resolve differences of opinion?
+[Page 22] [Font 11.0pt] [Bold False] [Numbered True] d. Mention responsibilities of elected representatives after a
+[Page 22] [Font 11.0pt] [Bold False] [Numbered True] a. A law is passed without public discussion
+[Page 22] [Font 11.0pt] [Bold False] [Numbered True] b. Citizens vote to choose their representatives
+[Page 22] [Font 11.0pt] [Bold False] [Numbered True] d. A minister takes an independent decision
+[Page 22] [Font 11.0pt] [Bold False] [Numbered True] a. Laws are applied equally to all
+[Page 22] [Font 11.0pt] [Bold False] [Numbered True] b. Courts review government actions
+[Page 22] [Font 11.0pt] [Bold False] [Numbered True] d. Citizens challenge laws through legal means
+[Page 23] [Font 11.0pt] [Bold False] [Numbered True] a. How can this strengthen democracy?
+[Page 23] [Font 11.0pt] [Bold False] [Numbered True] b. How can it weaken democracy if used irresponsibly?
+[Page 23] [Font 11.0pt] [Bold False] [Numbered True] 10. Choose any one democratic institution in India (such as
+[Page 23] [Font 11.0pt] [Bold False] [Numbered True] a. Its role in democracy
+[Page 23] [Font 11.0pt] [Bold False] [Numbered True] 11. What role does the Constitution play in strengthening democracy
+[Page 23] [Font 11.0pt] [Bold False] [Numbered True] 12. What challenges do you think democracy in India faces today?
+[Page 24] [Font 15.0pt] [Bold True] [Numbered False] Notes
+
+[RESPONSE]
+{"topics":[{"title":"The Big Questions","page":1,"subtopics":[]},{"title":"Tracing Democratic Traditions from Early Times","page":2,"subtopics":[]},{"title":"Principles of Democracy","page":4,"subtopics":["Popular Sovereignty","Rule of Law","Fundamental Rights","Separation of Powers","Accountability and Transparency","Multi-Party System","Safeguarding the Rights of Vulnerable Groups"]},{"title":"Types of Democracy","page":10,"subtopics":["Presidential Democracy","Parliamentary","Direct Democracy","Role of Media in Democracy"]},{"title":"Democracy in Practice: India’s Living","page":13,"subtopics":["Case Study: Democracy at the Grassroots in India","Development Through People’s Participation","Women and the Right to Vote: The Indian Experience","Women’s Reservation in Local Bodies"]},{"title":"Challenges to Democratic Practices in India","page":18,"subtopics":["Legislation","Emergency"]},{"title":"Democracy and You","page":20,"subtopics":["Civic responsibility","Think, Discuss, Act","Before we move on..."]},{"title":"Questions and activities","page":22,"subtopics":[]},{"title":"Notes","page":24,"subtopics":[]}]}
+
+================================================================================
+================================================================================
+TIME          : 2026-11-27 12:07:52
+SOURCE        : material_service.structure_headings (material_id=1061be7a-3c52-4fe8-bc23-eb457f71a2fc)
+MODEL         : openai/gpt-oss-120b
+STATUS        : SUCCESS
+LATENCY       : 8070.2 ms (8.07 s)
+TOKENS        : input=2444 | output=1123 | total=3567
+--------------------------------------------------------------------------------
+[USER QUERY / PROMPT]
+Clean this list of raw PDF heading candidates using their font size, bold, and numbering cues. Remove noise (standalone chapter numbers, running headers, 'EXERCISES', figure/table labels). Group subheadings under their parent main headings. Return ONLY valid JSON:
+{"topics": [{"title": "Main Heading", "page": 1, "subtopics": ["Subheading 1", "Subheading 2"]}]}
+
+Raw candidates:
+[Page 1] [Font 14.0pt] [Bold False] [Numbered True] 8.1 Addition and Subtraction of Algebraic
+[Page 1] [Font 14.0pt] [Bold False] [Numbered False] Expressions
+[Page 1] [Font 31.0pt] [Bold False] [Numbered False] Algebraic Expressions
+[Page 1] [Font 31.0pt] [Bold False] [Numbered False] and Identities
+[Page 1] [Font 100.0pt] [Bold False] [Numbered False] CHAPTER8
+[Page 2] [Font 16.0pt] [Bold False] [Numbered False] EXERCISE 8.1
+[Page 2] [Font 12.0pt] [Bold True] [Numbered True] 1. Add the following.
+[Page 2] [Font 12.0pt] [Bold True] [Numbered True] 2. (a)
+[Page 2] [Font 12.0pt] [Bold False] [Numbered True] 18 – 3p – 11q + 5pq – 2pq2 + 5p2q
+[Page 2] [Font 14.0pt] [Bold False] [Numbered False] 8.2
+[Page 2] [Font 14.0pt] [Bold False] [Numbered False] Multiplication of Algebraic Expressions:
+[Page 2] [Font 14.0pt] [Bold False] [Numbered False] Introduction
+[Page 2] [Font 11.0pt] [Bold True] [Numbered False] Pattern of dots
+[Page 2] [Font 11.0pt] [Bold True] [Numbered False] Total number of dots
+[Page 2] [Font 12.0pt] [Bold False] [Numbered True] 4 × 9
+[Page 2] [Font 12.0pt] [Bold False] [Numbered True] 5 × 7
+[Page 4] [Font 14.0pt] [Bold False] [Numbered True] 8.3 Multiplying a Monomial by a Monomial
+[Page 4] [Font 12.0pt] [Bold False] [Numbered True] 8.3.1 Multiplying two monomials
+[Page 4] [Font 12.0pt] [Bold False] [Numbered True] 4 × (3x) = 3x + 3x + 3x + 3x = 12x
+[Page 4] [Font 11.0pt] [Bold False] [Numbered True] 5 × 4 = 20
+[Page 4] [Font 12.0pt] [Bold False] [Numbered True] 8.3.2 Multiplying three or more monomials
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] length
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] breadth
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] area
+[Page 5] [Font 11.0pt] [Bold True] [Numbered False] height
+[Page 5] [Font 16.0pt] [Bold False] [Numbered False] EXERCISE 8.2
+[Page 5] [Font 12.0pt] [Bold True] [Numbered True] 1. Find the product of the following pairs of monomials.
+[Page 5] [Font 12.0pt] [Bold True] [Numbered True] 2. Find the areas of rectangles with the following pairs of monomials as their lengths and
+[Page 6] [Font 12.0pt] [Bold True] [Numbered True] 3. Complete the table of products.
+[Page 6] [Font 12.0pt] [Bold True] [Numbered True] 4. Obtain the volume of rectangular boxes with the following length, breadth and height
+[Page 6] [Font 12.0pt] [Bold True] [Numbered True] 5. Obtain the product of
+[Page 6] [Font 14.0pt] [Bold False] [Numbered True] 8.4 Multiplying a Monomial by a Polynomial
+[Page 6] [Font 12.0pt] [Bold True] [Numbered False] Expression that contains two terms is called a binomial. An expression containing three
+[Page 6] [Font 12.0pt] [Bold True] [Numbered False] terms is a trinomial and so on. In general, an expression containing, one or more terms with
+[Page 6] [Font 12.0pt] [Bold False] [Numbered True] 8.4.1 Multiplying a monomial by a binomial
+[Page 6] [Font 11.0pt] [Bold False] [Numbered True] 7 × 106 = 7 × (100 + 6)
+[Page 6] [Font 11.0pt] [Bold False] [Numbered True] 7 × 38 = 7 × (40 – 2)
+[Page 7] [Font 12.0pt] [Bold False] [Numbered True] 8.4.2 Multiplying a monomial by a trinomial
+[Page 8] [Font 16.0pt] [Bold False] [Numbered False] EXERCISE 8.3
+[Page 8] [Font 12.0pt] [Bold True] [Numbered True] 1. Carry out the multiplication of the expressions in each of the following pairs.
+[Page 8] [Font 12.0pt] [Bold True] [Numbered True] 2. Complete the table.
+[Page 8] [Font 11.0pt] [Bold True] [Numbered False] First expression
+[Page 8] [Font 11.0pt] [Bold True] [Numbered False] Second expression
+[Page 8] [Font 11.0pt] [Bold True] [Numbered False] Product
+[Page 8] [Font 12.0pt] [Bold True] [Numbered False] x + y – 5
+[Page 8] [Font 12.0pt] [Bold True] [Numbered True] 3. Find the product.
+[Page 8] [Font 12.0pt] [Bold True] [Numbered True] 4. (a)
+[Page 8] [Font 12.0pt] [Bold True] [Numbered True] 5. (a)
+[Page 8] [Font 14.0pt] [Bold False] [Numbered False] 8.5
+[Page 8] [Font 14.0pt] [Bold False] [Numbered False] Multiplying a Polynomial by a Polynomial
+[Page 8] [Font 12.0pt] [Bold False] [Numbered True] 8.5.1 Multiplying a binomial by a binomial
+[Page 8] [Font 12.0pt] [Bold True] [Numbered False] In multiplication of polynomials with polynomials, we should always look for like
+[Page 9] [Font 12.0pt] [Bold False] [Numbered True] 8.5.2 Multiplying a binomial by a trinomial
+[Page 10] [Font 16.0pt] [Bold False] [Numbered False] EXERCISE 8.4
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 1. Multiply the binomials.
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 2. Find the product.
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 3. Simplify.
+[Page 10] [Font 16.0pt] [Bold False] [Numbered False] WHAT HAVE WE DISCUSSED?
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 1. Expressions are formed from variables and constants.
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 2. Terms are added to form expressions. Terms themselves are formed as product of factors.
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 3. Expressions that contain exactly one, two and three terms are called monomials, binomials and
+[Page 10] [Font 12.0pt] [Bold True] [Numbered False] trinomials respectively. In general, any expression containing one or more terms with non-zero
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 4. Like terms are formed from the same variables and the powers of these variables are the same,
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 5. While adding (or subtracting) polynomials, first look for like terms and add (or subtract) them;
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 6. There are number of situations in which we need to multiply algebraic expressions: for example, in
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 7. A monomial multiplied by a monomial always gives a monomial.
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 8. While multiplying a polynomial by a monomial, we multiply every term in the polynomial by the
+[Page 10] [Font 12.0pt] [Bold True] [Numbered True] 9. In carrying out the multiplication of a polynomial by a binomial (or trinomial), we multiply term by
+
+[RESPONSE]
+{"topics":[{"title":"Addition and Subtraction of Algebraic Expressions","page":1,"subtopics":[]},{"title":"Multiplication of Algebraic Expressions: Introduction","page":2,"subtopics":[]},{"title":"Multiplying a Monomial by a Monomial","page":4,"subtopics":["Multiplying two monomials","Multiplying three or more monomials"]},{"title":"Multiplying a Monomial by a Polynomial","page":6,"subtopics":["Multiplying a monomial by a binomial","Multiplying a monomial by a trinomial"]},{"title":"Multiplying a Polynomial by a Polynomial","page":8,"subtopics":["Multiplying a binomial by a binomial","Multiplying a binomial by a trinomial"]}]}
+
+================================================================================
+================================================================================
+TIME          : 2026-11-27 12:28:47
+SOURCE        : material_service.structure_headings (material_id=20505425-19be-461a-abc7-477f1889a3dc)
+MODEL         : openai/gpt-oss-120b
+STATUS        : SUCCESS
+LATENCY       : 8184.4 ms (8.18 s)
+TOKENS        : input=925 | output=1254 | total=2179
+--------------------------------------------------------------------------------
+[USER QUERY / PROMPT]
+Clean this list of raw PDF heading candidates using their font size, bold, and numbering cues. Remove noise (standalone chapter numbers, running headers, 'EXERCISES', figure/table labels). Group subheadings under their parent main headings. Return ONLY valid JSON:
+{"topics": [{"title": "Main Heading", "page": 1, "subtopics": ["Subheading 1", "Subheading 2"]}]}
+
+Raw candidates:
+[Page 1] [Font 16.0pt] [Bold False] [Numbered False] CHAPTER
+[Page 1] [Font 14.0pt] [Bold False] [Numbered True] 5.1 WHAT ARE LIFE PROCESSES?
+[Page 3] [Font 14.0pt] [Bold False] [Numbered True] 5.2.1 Autotrophic Nutrition
+[Page 6] [Font 14.0pt] [Bold False] [Numbered True] 5.2.2 Heterotrophic Nutrition
+[Page 6] [Font 14.0pt] [Bold False] [Numbered True] 5.2.3 How do Organisms obtain their Nutrition?
+[Page 6] [Font 14.0pt] [Bold False] [Numbered True] 5.2.4 Nutrition in Human Beings
+[Page 9] [Font 14.0pt] [Bold False] [Numbered True] 5.3 RESPIRATION
+[Page 12] [Font 15.0pt] [Bold False] [Numbered False] Do You Know?
+[Page 13] [Font 14.0pt] [Bold False] [Numbered True] 5.4 TRANSPORT
+[Page 13] [Font 14.0pt] [Bold False] [Numbered False] ANSPORT
+[Page 13] [Font 14.0pt] [Bold False] [Numbered False] ANSPORTATION
+[Page 13] [Font 14.0pt] [Bold False] [Numbered True] 5.4.1 Transportation in Human Beings
+[Page 13] [Font 15.0pt] [Bold False] [Numbered False] Do You Know?
+[Page 16] [Font 14.0pt] [Bold False] [Numbered True] 5.4.2 Transportation in Plants
+[Page 18] [Font 14.0pt] [Bold False] [Numbered True] 5.5 EXCRETION
+[Page 18] [Font 14.0pt] [Bold False] [Numbered True] 5.5.1 Excretion in Human Beings
+[Page 20] [Font 14.0pt] [Bold False] [Numbered True] 5.5.2 Excretion in Plants
+[Page 20] [Font 18.0pt] [Bold False] [Numbered False] What you have learnt
+[Page 20] [Font 12.0pt] [Bold False] [Numbered False] Think it over!
+[Page 21] [Font 10.5pt] [Bold False] [Numbered True] 10. What would be the consequences of a deficiency of haemoglobin in our bodies?
+[Page 21] [Font 10.5pt] [Bold False] [Numbered True] 11. Describe double circulation of blood in human beings. Why is it necessary?
+[Page 21] [Font 10.5pt] [Bold False] [Numbered True] 12. What are the differences between the transport of materials in xylem and phloem?
+[Page 21] [Font 10.5pt] [Bold False] [Numbered True] 13. Compare the functioning of alveoli in the lungs and nephrons in the kidneys with
+
+[RESPONSE]
+{"topics":[{"title":"WHAT ARE LIFE PROCESSES?","page":1,"subtopics":[]},{"title":"Nutrition","page":3,"subtopics":["Autotrophic Nutrition","Heterotrophic Nutrition","How do Organisms obtain their Nutrition?","Nutrition in Human Beings"]},{"title":"RESPIRATION","page":9,"subtopics":[]},{"title":"TRANSPORT","page":13,"subtopics":["Transportation in Human Beings","Transportation in Plants"]},{"title":"EXCRETION","page":18,"subtopics":["Excretion in Human Beings","Excretion in Plants"]}]}
+
+================================================================================

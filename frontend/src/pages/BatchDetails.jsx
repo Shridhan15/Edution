@@ -4,12 +4,13 @@ import { useBatchDetail, useRemoveStudentFromBatch } from "../hooks/useBatches";
 import { formatTime } from "../components/batch/BatchCard";
 import AssignStudentsModal from "../components/batch/AssignStudentsModal";
 import AttendanceSheet from "../components/batch/AttendanceSheet";
+import BatchMaterialsSection from "../components/batch/BatchMaterialsSection";
 
 export default function BatchDetails() {
   const { batchId } = useParams();
   const navigate = useNavigate();
   const [isAssignOpen, setIsAssignOpen] = useState(false);
-  const [activeTab, setActiveTab] = useState("students"); // "students" | "attendance"
+  const [activeTab, setActiveTab] = useState("students"); // "students" | "attendance" | "materials"
 
   const { data: batch, isLoading, error } = useBatchDetail(batchId);
   const { mutate: removeStudent } = useRemoveStudentFromBatch(batchId);
@@ -18,6 +19,12 @@ export default function BatchDetails() {
     return <div className="p-8 text-gray-500">Loading batch...</div>;
   if (error)
     return <div className="p-8 text-red-500">Error: {error.message}</div>;
+
+  const tabs = [
+    { id: "students", label: `Students (${batch.students.length})` },
+    { id: "attendance", label: "Attendance" },
+    { id: "materials", label: "Study Materials" },
+  ];
 
   return (
     <div className="space-y-6 p-8">
@@ -42,33 +49,37 @@ export default function BatchDetails() {
           </p>
         </div>
 
-        <div className="flex flex-wrap gap-2">
+        <button
+          onClick={() => setIsAssignOpen(true)}
+          className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
+        >
+          + Assign Students
+        </button>
+      </div>
+
+      {/* Navigation Tabs */}
+      <div className="flex gap-2 border-b border-gray-200">
+        {tabs.map((tab) => (
           <button
-            onClick={() =>
-              setActiveTab(
-                activeTab === "attendance" ? "students" : "attendance",
-              )
-            }
-            className={`rounded-lg px-4 py-2 text-sm font-medium transition-colors ${
-              activeTab === "attendance"
-                ? "bg-blue-600 text-white"
-                : "border border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+            key={tab.id}
+            type="button"
+            onClick={() => setActiveTab(tab.id)}
+            className={`border-b-2 px-4 py-2.5 text-sm font-medium transition-colors ${
+              activeTab === tab.id
+                ? "border-slate-900 text-slate-900"
+                : "border-transparent text-gray-500 hover:text-gray-800"
             }`}
           >
-            {activeTab === "attendance" ? "View Roster" : "Mark Attendance"}
+            {tab.label}
           </button>
-          <button
-            onClick={() => setIsAssignOpen(true)}
-            className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white hover:bg-slate-800"
-          >
-            + Assign Students
-          </button>
-        </div>
+        ))}
       </div>
 
       {/* Tab Content */}
       {activeTab === "attendance" ? (
         <AttendanceSheet batch={batch} />
+      ) : activeTab === "materials" ? (
+        <BatchMaterialsSection batch={batch} />
       ) : (
         <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
           <div className="mb-4 flex items-center justify-between">

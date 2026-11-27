@@ -187,3 +187,31 @@ class MaterialResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+
+
+# --- BATCH MATERIALS ---
+class BatchMaterialAssignRequest(BaseModel):
+    material_ids: List[UUID4]
+
+
+class BatchMaterialResponse(BaseModel):
+    id: UUID4  # material_id
+    chapter_id: UUID4
+    chapter_name: str
+    chapter_number: Optional[int] = None
+    subject_id: UUID4
+    subject_name: str
+    class_id: UUID4
+    class_name: str
+    title: str
+    file_name: str
+    file_url: str
+    file_size_bytes: Optional[int] = None
+    page_count: Optional[int] = None
+    processing_status: str
+    extracted_topics: List[MaterialTopic] = []
+    assigned_at: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True

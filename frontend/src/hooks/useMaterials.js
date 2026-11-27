@@ -1,4 +1,5 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import { useEffect, useRef } from "react";
 import {
     fetchChapterMaterials,
     uploadChapterMaterial,
@@ -6,18 +7,36 @@ import {
 } from "../api/materialsApi";
 
 export function useChapterMaterials(chapterId) {
-    return useQuery({
+    const queryClient = useQueryClient();
+    const wasIndexingRef = useRef(false);
+
+    const query = useQuery({
         queryKey: ["materials", chapterId],
         queryFn: () => fetchChapterMaterials(chapterId),
         enabled: !!chapterId,
-        refetchInterval: (query) => {
-            const list = query.state.data || [];
+        refetchInterval: (q) => {
+            const list = q.state.data || [];
             const hasPending = list.some(
                 (m) => m.processing_status === "PROCESSING" || m.processing_status === "PENDING"
             );
             return hasPending ? 3000 : false;
         },
     });
+
+    useEffect(() => {
+        const list = query.data || [];
+        const hasPending = list.some(
+            (m) => m.processing_status === "PROCESSING" || m.processing_status === "PENDING"
+        );
+
+        // Trigger invalidation once when indexing completes
+        if (wasIndexingRef.current && !hasPending) {
+            queryClient.invalidateQueries({ queryKey: ["allReadyMaterials"] });
+        }
+        wasIndexingRef.current = hasPending;
+    }, [query.data, queryClient]);
+
+    return query;
 }
 
 export function useUploadMaterial(chapterId) {
@@ -39,6 +58,7 @@ export function useDeleteMaterial(chapterId) {
         mutationFn: deleteMaterial,
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["materials", chapterId] });
+            queryClient.invalidateQueries({ queryKey: ["allReadyMaterials"] });
         },
     });
 }
