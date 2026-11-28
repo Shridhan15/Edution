@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   useBatchMaterials,
   useUnassignBatchMaterial,
@@ -6,12 +6,6 @@ import {
 import AssignMaterialModal from "./AssignMaterialModal";
 import PdfViewerModal from "../curriculum/PdfViewerModal";
 import MaterialRow from "../curriculum/MaterialRow";
-
-function formatBytes(bytes) {
-  if (!bytes) return "";
-  if (bytes < 1024 * 1024) return `${(bytes / 1024).toFixed(0)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
-}
 
 export default function BatchMaterialsSection({ batch }) {
   const [isAssignOpen, setIsAssignOpen] = useState(false);
@@ -22,9 +16,28 @@ export default function BatchMaterialsSection({ batch }) {
   const { mutate: unassignMaterial, isPending: isRemoving } =
     useUnassignBatchMaterial(batch.id);
 
+  // Group assigned materials by "Class • Subject" and sort chapters inside each group
+  const groupedMaterials = useMemo(() => {
+    const map = {};
+    for (const mat of materials) {
+      const groupKey = `${mat.class_name} • ${mat.subject_name}`;
+      if (!map[groupKey]) map[groupKey] = [];
+      map[groupKey].push(mat);
+    }
+
+    return Object.entries(map)
+      .sort(([a], [b]) => a.localeCompare(b))
+      .map(([label, items]) => [
+        label,
+        [...items].sort(
+          (a, b) => (a.chapter_number ?? 999) - (b.chapter_number ?? 999),
+        ),
+      ]);
+  }, [materials]);
+
   return (
     <div className="rounded-xl border border-gray-100 bg-white p-6 shadow-sm">
-      <div className="mb-4 flex items-center justify-between">
+      <div className="mb-5 flex items-center justify-between">
         <div>
           <h2 className="text-sm font-semibold uppercase tracking-wider text-gray-400">
             Assigned Study Materials ({materials.length})
@@ -47,32 +60,48 @@ export default function BatchMaterialsSection({ batch }) {
         <p className="py-6 text-sm text-gray-400">
           Loading assigned materials...
         </p>
-      ) : materials.length === 0 ? (
+      ) : groupedMaterials.length === 0 ? (
         <div className="rounded-lg border-2 border-dashed border-gray-100 py-10 text-center text-sm text-gray-500">
           No study materials assigned to this batch yet. Click "+ Assign
           Material" to pick from Curriculum.
         </div>
       ) : (
-        <div className="divide-y divide-gray-100">
-          {materials.map((mat) => (
-            <MaterialRow
-              key={mat.id}
-              material={mat}
-              badgeText={mat.subject_name}
-              subtitlePrefix={
-                mat.chapter_number
-                  ? `Ch. ${mat.chapter_number}: ${mat.chapter_name}`
-                  : mat.chapter_name
-              }
-              isExpanded={expandedOutlineId === mat.id}
-              onToggleOutline={(id) =>
-                setExpandedOutlineId((prev) => (prev === id ? null : id))
-              }
-              onViewPdf={setViewingMaterial}
-              removeLabel="Remove"
-              isRemoving={isRemoving}
-              onRemove={(m) => unassignMaterial(m.id)}
-            />
+        <div className="space-y-6">
+          {groupedMaterials.map(([groupLabel, items]) => (
+            <div key={groupLabel}>
+              {/* Class • Subject Group Header */}
+              <div className="mb-2 flex items-center justify-between">
+                <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
+                  {groupLabel}
+                </p>
+                <span className="text-[11px] font-medium text-gray-400">
+                  {items.length} {items.length === 1 ? "file" : "files"}
+                </span>
+              </div>
+
+              {/* Grouped Materials Box */}
+              <div className="divide-y divide-gray-100 rounded-xl border border-gray-200 px-4 py-1">
+                {items.map((mat) => (
+                  <MaterialRow
+                    key={mat.id}
+                    material={mat}
+                    subtitlePrefix={
+                      mat.chapter_number
+                        ? `Ch. ${mat.chapter_number}: ${mat.chapter_name}`
+                        : mat.chapter_name
+                    }
+                    isExpanded={expandedOutlineId === mat.id}
+                    onToggleOutline={(id) =>
+                      setExpandedOutlineId((prev) => (prev === id ? null : id))
+                    }
+                    onViewPdf={setViewingMaterial}
+                    removeLabel="Remove"
+                    isRemoving={isRemoving}
+                    onRemove={(m) => unassignMaterial(m.id)}
+                  />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       )}

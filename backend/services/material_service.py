@@ -10,7 +10,7 @@ from typing import Optional
 
 import pymupdf
 from fastapi import HTTPException, UploadFile
-from pinecone import Pinecone
+from pinecone import Pinecone, EmbedQuery
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from supabase import create_client, Client
@@ -54,6 +54,49 @@ def _get_pinecone_index():
         pc = Pinecone(api_key=PINECONE_API_KEY)
         _pinecone_index = pc.index(PINECONE_INDEX_NAME)
     return _pinecone_index
+
+
+def _query_material_chunks_sync(
+    query_text: str,
+    material_id: str,
+    top_k: int = 3,
+) -> list[dict]:
+    index = _get_pinecone_index()
+    response = index.documents.search(
+        namespace=PINECONE_NAMESPACE,
+        top_k=top_k,
+        score_by=[EmbedQuery(field=PINECONE_TEXT_FIELD, query=query_text)],
+        filter={"material_id": {"$eq": material_id}},
+        include_fields=[PINECONE_TEXT_FIELD, "page_number", "material_id"],
+    )
+
+    results = []
+    for doc in response.matches:
+        results.append(
+            {
+                "id": doc.id,
+                "score": doc.score,
+                "text": doc.get(PINECONE_TEXT_FIELD, ""),
+                "page_number": doc.get("page_number"),
+                "material_id": doc.get("material_id", material_id),
+            }
+        )
+    return results
+
+
+async def query_material_chunks(
+    query_text: str,
+    material_id: str,
+    top_k: int = 3,
+) -> list[dict]:
+    return await asyncio.to_thread(
+        _query_material_chunks_sync,
+        query_text,
+        material_id,
+        top_k,
+    )
+
+
 
 
 # ==========================================

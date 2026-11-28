@@ -5,7 +5,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import text
 
 from database import get_db
-from routes import students,curriculum,batches,attendance,materials,batch_materials
+from routes import students,curriculum,batches,attendance,materials,batch_materials,tests
 
 app = FastAPI(title="Tuition Platform API")
 
@@ -20,10 +20,11 @@ app.add_middleware(
 # Register the modular routes
 app.include_router(students.router)
 app.include_router(curriculum.router)
+app.include_router(batch_materials.router)
 app.include_router(batches.router)
 app.include_router(attendance.router)
 app.include_router(materials.router)
-app.include_router(batch_materials.router)
+app.include_router(tests.router)
 
 @app.get("/api/health")
 async def health_check(db: AsyncSession = Depends(get_db)):

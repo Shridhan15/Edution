@@ -73,6 +73,7 @@ def call_llm(
     model: str = DEFAULT_MODEL,
     temperature: float = 0.0,
     json_mode: bool = False,
+    response_schema: Optional[dict] = None,
 ) -> str:
     """Centralized LLM call that logs every request/response to backend/logs/llm_calls.log."""
     client = _get_client()
@@ -87,7 +88,12 @@ def call_llm(
         "messages": messages,
         "temperature": temperature,
     }
-    if json_mode:
+    if response_schema:
+        kwargs["response_format"] = {
+            "type": "json_schema",
+            "json_schema": response_schema,
+        }
+    elif json_mode:
         kwargs["response_format"] = {"type": "json_object"}
 
     t0 = time.perf_counter()

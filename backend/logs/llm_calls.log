@@ -450,3 +450,769 @@ Raw candidates:
 {"topics":[{"title":"WHAT ARE LIFE PROCESSES?","page":1,"subtopics":[]},{"title":"Nutrition","page":3,"subtopics":["Autotrophic Nutrition","Heterotrophic Nutrition","How do Organisms obtain their Nutrition?","Nutrition in Human Beings"]},{"title":"RESPIRATION","page":9,"subtopics":[]},{"title":"TRANSPORT","page":13,"subtopics":["Transportation in Human Beings","Transportation in Plants"]},{"title":"EXCRETION","page":18,"subtopics":["Excretion in Human Beings","Excretion in Plants"]}]}
 
 ================================================================================
+================================================================================
+TIME          : 2026-11-28 18:07:38
+SOURCE        : test_ai_service.generate_test_paper (batch_id=a776586b-73c4-4d6d-b7d8-a492d9b7e1f1)
+MODEL         : openai/gpt-oss-120b
+STATUS        : ERROR
+LATENCY       : 5354.1 ms (5.35 s)
+TOKENS        : input=0 | output=0 | total=0
+--------------------------------------------------------------------------------
+[SYSTEM PROMPT]
+You are an experienced school and coaching-center exam setter.
+Create an offline, printable question paper and teacher's answer key strictly grounded in <study_context>.
+
+Rules:
+1. Grounding: Use ONLY facts, formulas, and concepts present in <study_context>. Do not introduce out-of-syllabus content.
+2. Exact Counts: Match the exact section names, question types, question counts, and marks specified in <blueprint>.
+3. Zero Overlap: Never test the same fact or problem in both an objective question (MCQ/True-False) and a subjective question.
+4. MCQs: Provide exactly 4 distinct options with plausible distractors. Avoid "All of the above". Include a 1-line explanation.
+5. Subjective (SHORT_ANSWER / LONG_ANSWER): Provide a clear model answer AND a step-wise marking_scheme whose step marks sum EXACTLY to the question's total marks.
+6. Attribution: Copy the exact `material_id` UUID from the chunk header into `source_material_id` and set a concise `topic_tag`.
+
+
+[USER QUERY / PROMPT]
+<blueprint>
+Class Level: General
+Overall Difficulty: MEDIUM
+Sections:
+- Section A: 2 × MCQ (1.0 marks each)
+- Section B: 1 × SHORT_ANSWER (3.0 marks each)
+</blueprint>
+
+<teacher_instructions>
+Keep wording clear and concise.
+</teacher_instructions>
+
+<study_context>
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Atmosphere and Climate]
+57
+3 – Atmosphere 
+and Climate
+	
+Æ
+Climate change is the long-term change in weather caused 
+mainly by human activities like burning fuels and cutting trees, 
+which leads to global warming and extreme weather conditions. 
+	
+Æ
+We can reduce our carbon footprint by saving energy, using 
+renewable sources, planting trees, and living in more eco-
+friendly ways.
+Questions and activities 
+1.	
+What is atmosphere? Explain its composition with the help of 
+a pie diagram.
+2.	
+Draw a labelled diagram of the structure of atmosphere.
+3.	
+Which are the four main seasons of India?
+4.	
+Why do you not feel the pressure of the atmosphere?
+5.	
+In which layer of the atmosphere do aeroplanes fly and why?
+6.	
+Distinguish between the following:
+a.	 The troposphere and stratosphere
+b.	 The south-west monsoon and north-east monsoon
+7.	
+Do it yourself:  Table 3.3  shows the average monthly temperatures 
+and rainfall amounts for 10 representative stations. Study these 
+figures on your own and convert them into ‘temperature and 
+rainfall’ graphs. The visual representations will help you grasp 
+their similarities and differences at a glance. One such graph 
+(Fig. 3.14) is already prepared for you. See if you can arrive at 
+some broad generalisations about our diverse climatic conditions. 
+7.1. 	Now look at Table 3.3 again. Re-arrange the 10 stations 
+according to their distance from the equator. 
+7.2 	 Find out:
+a.	 Two stations with the most extreme climate.
+b.	 Two stations influenced by retreating mon
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Composition and Structure of the Atmosphere]
+40
+Understanding Society: 
+India and Beyond 
+Grade 9 – Part 1 
+Composition and Structure of  
+the Atmosphere
+Composition of the Atmosphere
+The Earth’s atmosphere is composed of a mixture of various gases. 
+Nitrogen and oxygen are the two primary and most abundant 
+gases that are essential to life on the Earth. Carbon dioxide, argon, 
+helium, neon, krypton, xenon, ozone, and hydrogen are some other 
+gases present in the atmosphere, but are found in lesser quantities. 
+Besides these, the atmosphere also consists of water vapour and 
+tiny dust particles. The amount of water vapour in the atmosphere 
+varies, but it generally ranges from 0.1 per cent to 0.4 per cent. It 
+plays a significant role in cloud formation and precipitation. The 
+composition of the atmosphere also varies with altitude. 
+Nitrogen 78%
+Oxygen 
+21%
+Others 0.03%
+Carbon Dioxide 0.04%
+Argon 0.93%
+Fig. 3.2. Composition of the atmosphere 
+LET’S RECALL
+How is nitrogen useful for plants? Remember that you learnt  
+this in the chapter ‘The Invisible Living World: Beyond Our  
+Naked Eyes’, in your Grade 8 Science textbook.
+Structure of the Atmosphere
+The atmosphere has a layered structure. These layers are defined 
+on the basis of changes in temperature and density with increasing 
+altitude. The density of air is highest near the Earth’s surface and
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Seasons in India]
+47
+3 – Atmosphere 
+and Climate
+You may have observed that weather conditions often fluctuate, 
+sometimes even within a single day. However, based on generalised 
+monthly atmospheric conditions, or a common pattern over a 
+few weeks or months—such as the days being cool or hot, windy 
+or calm, cloudy or bright, and wet or dry—the year is divided 
+into seasons.
+LET’S ANALYSE
+Note down the weather report from a local newspaper for two 
+weeks and observe the changes occurring in the weather.
+Seasons in India
+The climate of India can be broadly classified as tropical monsoon. 
+The Indian Meteorological Department (IMD) has recognised four 
+distinct seasons in India:
+	
+
+Winter: The winter season generally lasts from December to 
+early April. The coldest months of the year are December and 
+January, when the average temperature in the north-west is 
+around 10–15°C. Temperatures increase towards the equator, 
+reaching around 20–25°C in mainland India’s south-east.
+	
+
+Summer or pre-monsoon: The summer or pre-monsoon season 
+spans from April to June, or up to July in north-western India. 
+In western and southern regions, the hottest month is April; in 
+northern regions, it is May. The average temperature across most 
+of inland India ranges from 32–40°C.
+	
+
+Monsoon or rainy (Advancing monsoon):  The monsoon 
+season generally spans from June to September. This season is 
+dominated by the humid south-west summer monsoon, which 
+slowly sweeps across the country in late May or early June
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Punjab Floods 2025: A Case Study]
+55
+3 – Atmosphere 
+and Climate
+places and relief operations were carried out, the overall impact 
+was devastating. The state suffered heavy economic losses, social 
+disruption, and environmental damage, underscoring the urgent 
+need for improved flood management and preparedness.
+Causes 
+The floods in Punjab resulted from both natural and human-made 
+factors.
+	
+
+Natural Causes: In 2025, Punjab faced very heavy monsoon 
+rains, which were intensified by the western disturbances that 
+brought even more moisture and rain. It rained not only in 
+Punjab but also in Himachal Pradesh and Jammu & Kashmir. 
+The major rivers of Punjab—the Satluj, the Beas, the Ravi, and 
+the Ghaggar—were already flowing high before the heavy rains 
+began. When additional rain fell, water from the hills and local 
+rainfall caused rivers to overflow, leading to severe flooding in 
+many parts of Punjab.
+	
+
+Human-made Causes: The floods were further aggravated by 
+weak and old river embankments, or dhūsī bāndh, which could 
+not stop the rising water during heavy monsoon rains. People 
+had also built houses and farms too close to the rivers, reducing 
+the natural space where floodwater could spread safely. Over 
+time, silt and mud had collected in rivers and dams, reducing 
+their capacity to hold and carry water. In some areas, flood 
+warnings came late or were not clearly communicated, leaving 
+people unprepared. All these factors together increased the 
+damage caused by the floods.
+Fig. 3.13. Relief oper
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Atmosphere and Climate]
+Atmosphere and  
+Climate
+Chapter 3
+1.	
+What is the composition of the atmosphere?
+2. 
+How do the different layers of the atmosphere affect the planet Earth?
+3.	
+What is the mechanism of monsoon?
+4.	
+How can we reduce our carbon footprint?
+The Big Questions
+What do you see when you look up in the sky? You might see the 
+floating clouds, the sunshine, and feel a breeze as well. All of these 
+are a result of a blanket of air surrounding the Earth, called the 
+atmosphere. It is pulled down around the Earth by gravity, and 
+is a mixture of gases in various proportions, vital for the survival 
+of all living beings on the Earth. The atmosphere shields us from 
+the harmful radiation coming from the Sun, including ultraviolet 
+radiation. It regulates the Earth’s temperature by trapping some of 
+the Sun’s energy and prevents it from escaping back into space. The 
+atmosphere is a key component of the Earth’s weather and climate 
+systems, influencing factors such as temperature, humidity, and 
+air pressure.
+THINK ABOUT IT
+ 
+ 
+ 
+ 
+ 
+Can you imagine what would happen if there were no atmosphere? 
+Discuss your thoughts with your friends and teachers.
+Gravity:  
+Gravity is a 
+fundamental 
+physical force 
+of attraction 
+between 
+objects that 
+have mass or 
+energy such as 
+the Sun and the 
+Earth. The force 
+of attraction 
+that the Earth’s 
+mass exerts on 
+the objects that 
+are on or close 
+to its surface is 
+referred to as 
+Earth’s gravity.
+Fig. 3.1
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Weather and Climate]
+43
+3 – Atmosphere 
+and Climate
+	
+
+Exosphere: The uppermost layer of the atmosphere is known 
+as the exosphere, characterised by very thin air. Light gases like 
+helium and hydrogen float into space from this layer due to 
+weak gravity. All of these layers play a vital role in the Earth’s 
+atmospheric processes and also affect its weather and climate.
+DON’T MISS OUT
+The air above us exerts a significant force on our 
+bodies, and yet we do not feel it. This is because air 
+presses on us from all sides, and our bodies exert a 
+counter-pressure in response.
+Fig. 3.5. The pressure inside our bodies is also equal to 
+the atmospheric pressure and cancels the pressure from 
+outside.
+Weather and Climate
+‘Is it going to rain today?’ ‘Will it be bright and sunny today?’ How 
+often do you find yourself wondering about these questions when 
+you want to go out and play? 
+The term weather refers to the hour-to-hour and day-to-day 
+conditions of the atmosphere. Hot or humid weather may make one 
+irritable, while pleasant or breezy weather may make one cheerful, 
+or even plan for an outing. Weather can vary significantly from 
+day-to-day. The average weather conditions of a place over a longer 
+period of time refer to the climate of the place.  Climate refers to the 
+sum total of weather conditions and variations over a large area for 
+an extended period of time, usually thirty years or more. 
+Elements of Weather and Climate
+Various elements influence weather and climate. The major elements
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Climate Change]
+53
+3 – Atmosphere 
+and Climate
+Climate Change
+One of the most urgent challenges that the Earth is facing today is 
+climate change. It refers to long-term changes in weather patterns, 
+such as temperature, rainfall, and wind, caused mainly by human 
+activities, including the burning of fossil fuels, deforestation, and 
+industrial pollution that releases gases like carbon dioxide into the 
+atmosphere. These actions increase greenhouse gases such as carbon 
+dioxide, methane, nitrous oxide, water vapour in the atmosphere, 
+trapping heat and raising global temperatures. As a result, we are 
+witnessing more frequent floods, droughts, melting of glaciers, 
+rising sea levels, and loss of biodiversity. Climate change not only 
+threatens ecosystems but also impacts human health, agriculture, 
+and livelihoods. You may recall that you have read about ‘climate 
+change’ in your grade 8 Science textbook. What actions can be 
+taken to reduce such changes? It also has great impact on almost all 
+sections of the population including women and children. Tackling 
+this issue requires collective efforts—reducing carbon footprints, 
+using renewable energy, protecting forests, and adopting sustainable 
+lifestyles. Every small step counts, and every human being plays a 
+vital role in shaping a healthier and greener future.
+LET’S EXPLORE 
+My Carbon Footprint 
+Step 1: My Daily Habits
+Tick the options that best describe you.
+A.	
+Transport
+	
+I usually walk/use a cycle. (Low impact)
+	
+I use public tran
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Punjab Floods 2025: A Case Study]
+56
+Understanding Society: 
+India and Beyond 
+Grade 9 – Part 1 
+Effects of the Floods in Punjab
+	
+
+Many people lost their lives in the floods.
+	
+
+Thousands of people had to leave their homes and move to relief 
+camps for safety.
+	
+
+Large areas of farmland were covered with water, and crops 
+like paddy were severely damaged.
+	
+
+Poultry and dairy farms were damaged and destroyed. Many 
+animals, including cows, buffaloes, and chickens, got sick or died.
+	
+
+Roads, bridges, border fences, and some public buildings were 
+also damaged.
+	
+
+Murky standing water caused health problems, including the 
+spread of waterborne diseases and sanitation concerns.
+Classroom Discussion 
+	
+
+To what extent did natural factors cause these floods compared 
+to human activities?
+	
+
+Do you think better planning could have reduced the damage? 
+How?
+	
+
+What are the guidelines for the management of floods according 
+to the National Disaster Management Authority (NDMA)?
+	
+
+What role can students/youth play in helping with disaster 
+preparedness?
+Before we move on...
+	
+Æ
+The Earth’s atmosphere is made up of different gases, mainly 
+nitrogen and oxygen, along with small amounts of other gases 
+like water vapour and dust, support life and help in forming 
+clouds and causing rainfall.
+	
+Æ
+The atmosphere is made up of different layers, namely the 
+Troposphere, Stratosphere, Mesosphere, Thermosphere, and 
+Exosphere, which are divided based on changes in temperature 
+and air density as we go higher above
+
+</study_context>
+
+[ERROR]
+Error code: 400 - {'error': {'message': "invalid JSON schema for response_format: 'generated_test_paper': /$defs/AIGeneratedQuestion/required: `required` is required to be supplied and to be an array including every key in properties. The following properties must be listed in `required`: explanation, marking_scheme, options, source_material_id", 'type': 'invalid_request_error', 'param': 'response_format', 'schema_path': '/$defs/AIGeneratedQuestion/required', 'schema_path_segments': ['$', '$defs', 'AIGeneratedQuestion', 'required'], 'schema_kind': 'required'}}
+
+================================================================================
+================================================================================
+TIME          : 2026-11-28 18:09:36
+SOURCE        : test_ai_service.generate_test_paper (batch_id=a776586b-73c4-4d6d-b7d8-a492d9b7e1f1)
+MODEL         : openai/gpt-oss-120b
+STATUS        : SUCCESS
+LATENCY       : 7987.1 ms (7.99 s)
+TOKENS        : input=4030 | output=1060 | total=5090
+--------------------------------------------------------------------------------
+[SYSTEM PROMPT]
+You are an experienced school and coaching-center exam setter.
+Create an offline, printable question paper and teacher's answer key strictly grounded in <study_context>.
+
+Rules:
+1. Grounding: Use ONLY facts, formulas, and concepts present in <study_context>. Do not introduce out-of-syllabus content.
+2. Exact Counts: Match the exact section names, question types, question counts, and marks specified in <blueprint>.
+3. Zero Overlap: Never test the same fact or problem in both an objective question (MCQ/True-False) and a subjective question.
+4. MCQs: Provide exactly 4 distinct options with plausible distractors. Avoid "All of the above". Include a 1-line explanation.
+5. Subjective (SHORT_ANSWER / LONG_ANSWER): Provide a clear model answer AND a step-wise marking_scheme whose step marks sum EXACTLY to the question's total marks.
+6. Attribution: Copy the exact `material_id` UUID from the chunk header into `source_material_id` and set a concise `topic_tag`.
+
+
+[USER QUERY / PROMPT]
+<blueprint>
+Class Level: General
+Overall Difficulty: MEDIUM
+Sections:
+- Section A: 2 × MCQ (1.0 marks each)
+- Section B: 1 × SHORT_ANSWER (3.0 marks each)
+</blueprint>
+
+<teacher_instructions>
+Keep wording clear and concise.
+</teacher_instructions>
+
+<study_context>
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Atmosphere and Climate]
+57
+3 – Atmosphere 
+and Climate
+	
+Æ
+Climate change is the long-term change in weather caused 
+mainly by human activities like burning fuels and cutting trees, 
+which leads to global warming and extreme weather conditions. 
+	
+Æ
+We can reduce our carbon footprint by saving energy, using 
+renewable sources, planting trees, and living in more eco-
+friendly ways.
+Questions and activities 
+1.	
+What is atmosphere? Explain its composition with the help of 
+a pie diagram.
+2.	
+Draw a labelled diagram of the structure of atmosphere.
+3.	
+Which are the four main seasons of India?
+4.	
+Why do you not feel the pressure of the atmosphere?
+5.	
+In which layer of the atmosphere do aeroplanes fly and why?
+6.	
+Distinguish between the following:
+a.	 The troposphere and stratosphere
+b.	 The south-west monsoon and north-east monsoon
+7.	
+Do it yourself:  Table 3.3  shows the average monthly temperatures 
+and rainfall amounts for 10 representative stations. Study these 
+figures on your own and convert them into ‘temperature and 
+rainfall’ graphs. The visual representations will help you grasp 
+their similarities and differences at a glance. One such graph 
+(Fig. 3.14) is already prepared for you. See if you can arrive at 
+some broad generalisations about our diverse climatic conditions. 
+7.1. 	Now look at Table 3.3 again. Re-arrange the 10 stations 
+according to their distance from the equator. 
+7.2 	 Find out:
+a.	 Two stations with the most extreme climate.
+b.	 Two stations influenced by retreating mon
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Composition and Structure of the Atmosphere]
+40
+Understanding Society: 
+India and Beyond 
+Grade 9 – Part 1 
+Composition and Structure of  
+the Atmosphere
+Composition of the Atmosphere
+The Earth’s atmosphere is composed of a mixture of various gases. 
+Nitrogen and oxygen are the two primary and most abundant 
+gases that are essential to life on the Earth. Carbon dioxide, argon, 
+helium, neon, krypton, xenon, ozone, and hydrogen are some other 
+gases present in the atmosphere, but are found in lesser quantities. 
+Besides these, the atmosphere also consists of water vapour and 
+tiny dust particles. The amount of water vapour in the atmosphere 
+varies, but it generally ranges from 0.1 per cent to 0.4 per cent. It 
+plays a significant role in cloud formation and precipitation. The 
+composition of the atmosphere also varies with altitude. 
+Nitrogen 78%
+Oxygen 
+21%
+Others 0.03%
+Carbon Dioxide 0.04%
+Argon 0.93%
+Fig. 3.2. Composition of the atmosphere 
+LET’S RECALL
+How is nitrogen useful for plants? Remember that you learnt  
+this in the chapter ‘The Invisible Living World: Beyond Our  
+Naked Eyes’, in your Grade 8 Science textbook.
+Structure of the Atmosphere
+The atmosphere has a layered structure. These layers are defined 
+on the basis of changes in temperature and density with increasing 
+altitude. The density of air is highest near the Earth’s surface and
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Seasons in India]
+47
+3 – Atmosphere 
+and Climate
+You may have observed that weather conditions often fluctuate, 
+sometimes even within a single day. However, based on generalised 
+monthly atmospheric conditions, or a common pattern over a 
+few weeks or months—such as the days being cool or hot, windy 
+or calm, cloudy or bright, and wet or dry—the year is divided 
+into seasons.
+LET’S ANALYSE
+Note down the weather report from a local newspaper for two 
+weeks and observe the changes occurring in the weather.
+Seasons in India
+The climate of India can be broadly classified as tropical monsoon. 
+The Indian Meteorological Department (IMD) has recognised four 
+distinct seasons in India:
+	
+
+Winter: The winter season generally lasts from December to 
+early April. The coldest months of the year are December and 
+January, when the average temperature in the north-west is 
+around 10–15°C. Temperatures increase towards the equator, 
+reaching around 20–25°C in mainland India’s south-east.
+	
+
+Summer or pre-monsoon: The summer or pre-monsoon season 
+spans from April to June, or up to July in north-western India. 
+In western and southern regions, the hottest month is April; in 
+northern regions, it is May. The average temperature across most 
+of inland India ranges from 32–40°C.
+	
+
+Monsoon or rainy (Advancing monsoon):  The monsoon 
+season generally spans from June to September. This season is 
+dominated by the humid south-west summer monsoon, which 
+slowly sweeps across the country in late May or early June
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Punjab Floods 2025: A Case Study]
+55
+3 – Atmosphere 
+and Climate
+places and relief operations were carried out, the overall impact 
+was devastating. The state suffered heavy economic losses, social 
+disruption, and environmental damage, underscoring the urgent 
+need for improved flood management and preparedness.
+Causes 
+The floods in Punjab resulted from both natural and human-made 
+factors.
+	
+
+Natural Causes: In 2025, Punjab faced very heavy monsoon 
+rains, which were intensified by the western disturbances that 
+brought even more moisture and rain. It rained not only in 
+Punjab but also in Himachal Pradesh and Jammu & Kashmir. 
+The major rivers of Punjab—the Satluj, the Beas, the Ravi, and 
+the Ghaggar—were already flowing high before the heavy rains 
+began. When additional rain fell, water from the hills and local 
+rainfall caused rivers to overflow, leading to severe flooding in 
+many parts of Punjab.
+	
+
+Human-made Causes: The floods were further aggravated by 
+weak and old river embankments, or dhūsī bāndh, which could 
+not stop the rising water during heavy monsoon rains. People 
+had also built houses and farms too close to the rivers, reducing 
+the natural space where floodwater could spread safely. Over 
+time, silt and mud had collected in rivers and dams, reducing 
+their capacity to hold and carry water. In some areas, flood 
+warnings came late or were not clearly communicated, leaving 
+people unprepared. All these factors together increased the 
+damage caused by the floods.
+Fig. 3.13. Relief oper
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Atmosphere and Climate]
+Atmosphere and  
+Climate
+Chapter 3
+1.	
+What is the composition of the atmosphere?
+2. 
+How do the different layers of the atmosphere affect the planet Earth?
+3.	
+What is the mechanism of monsoon?
+4.	
+How can we reduce our carbon footprint?
+The Big Questions
+What do you see when you look up in the sky? You might see the 
+floating clouds, the sunshine, and feel a breeze as well. All of these 
+are a result of a blanket of air surrounding the Earth, called the 
+atmosphere. It is pulled down around the Earth by gravity, and 
+is a mixture of gases in various proportions, vital for the survival 
+of all living beings on the Earth. The atmosphere shields us from 
+the harmful radiation coming from the Sun, including ultraviolet 
+radiation. It regulates the Earth’s temperature by trapping some of 
+the Sun’s energy and prevents it from escaping back into space. The 
+atmosphere is a key component of the Earth’s weather and climate 
+systems, influencing factors such as temperature, humidity, and 
+air pressure.
+THINK ABOUT IT
+ 
+ 
+ 
+ 
+ 
+Can you imagine what would happen if there were no atmosphere? 
+Discuss your thoughts with your friends and teachers.
+Gravity:  
+Gravity is a 
+fundamental 
+physical force 
+of attraction 
+between 
+objects that 
+have mass or 
+energy such as 
+the Sun and the 
+Earth. The force 
+of attraction 
+that the Earth’s 
+mass exerts on 
+the objects that 
+are on or close 
+to its surface is 
+referred to as 
+Earth’s gravity.
+Fig. 3.1
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Weather and Climate]
+43
+3 – Atmosphere 
+and Climate
+	
+
+Exosphere: The uppermost layer of the atmosphere is known 
+as the exosphere, characterised by very thin air. Light gases like 
+helium and hydrogen float into space from this layer due to 
+weak gravity. All of these layers play a vital role in the Earth’s 
+atmospheric processes and also affect its weather and climate.
+DON’T MISS OUT
+The air above us exerts a significant force on our 
+bodies, and yet we do not feel it. This is because air 
+presses on us from all sides, and our bodies exert a 
+counter-pressure in response.
+Fig. 3.5. The pressure inside our bodies is also equal to 
+the atmospheric pressure and cancels the pressure from 
+outside.
+Weather and Climate
+‘Is it going to rain today?’ ‘Will it be bright and sunny today?’ How 
+often do you find yourself wondering about these questions when 
+you want to go out and play? 
+The term weather refers to the hour-to-hour and day-to-day 
+conditions of the atmosphere. Hot or humid weather may make one 
+irritable, while pleasant or breezy weather may make one cheerful, 
+or even plan for an outing. Weather can vary significantly from 
+day-to-day. The average weather conditions of a place over a longer 
+period of time refer to the climate of the place.  Climate refers to the 
+sum total of weather conditions and variations over a large area for 
+an extended period of time, usually thirty years or more. 
+Elements of Weather and Climate
+Various elements influence weather and climate. The major elements
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Climate Change]
+53
+3 – Atmosphere 
+and Climate
+Climate Change
+One of the most urgent challenges that the Earth is facing today is 
+climate change. It refers to long-term changes in weather patterns, 
+such as temperature, rainfall, and wind, caused mainly by human 
+activities, including the burning of fossil fuels, deforestation, and 
+industrial pollution that releases gases like carbon dioxide into the 
+atmosphere. These actions increase greenhouse gases such as carbon 
+dioxide, methane, nitrous oxide, water vapour in the atmosphere, 
+trapping heat and raising global temperatures. As a result, we are 
+witnessing more frequent floods, droughts, melting of glaciers, 
+rising sea levels, and loss of biodiversity. Climate change not only 
+threatens ecosystems but also impacts human health, agriculture, 
+and livelihoods. You may recall that you have read about ‘climate 
+change’ in your grade 8 Science textbook. What actions can be 
+taken to reduce such changes? It also has great impact on almost all 
+sections of the population including women and children. Tackling 
+this issue requires collective efforts—reducing carbon footprints, 
+using renewable energy, protecting forests, and adopting sustainable 
+lifestyles. Every small step counts, and every human being plays a 
+vital role in shaping a healthier and greener future.
+LET’S EXPLORE 
+My Carbon Footprint 
+Step 1: My Daily Habits
+Tick the options that best describe you.
+A.	
+Transport
+	
+I usually walk/use a cycle. (Low impact)
+	
+I use public tran
+
+---
+[material_id=bf964be5-308f-45cb-ad92-92b76db8824b | source=NCERT Chapter 3: Atmosphere and Climate | topic=Punjab Floods 2025: A Case Study]
+56
+Understanding Society: 
+India and Beyond 
+Grade 9 – Part 1 
+Effects of the Floods in Punjab
+	
+
+Many people lost their lives in the floods.
+	
+
+Thousands of people had to leave their homes and move to relief 
+camps for safety.
+	
+
+Large areas of farmland were covered with water, and crops 
+like paddy were severely damaged.
+	
+
+Poultry and dairy farms were damaged and destroyed. Many 
+animals, including cows, buffaloes, and chickens, got sick or died.
+	
+
+Roads, bridges, border fences, and some public buildings were 
+also damaged.
+	
+
+Murky standing water caused health problems, including the 
+spread of waterborne diseases and sanitation concerns.
+Classroom Discussion 
+	
+
+To what extent did natural factors cause these floods compared 
+to human activities?
+	
+
+Do you think better planning could have reduced the damage? 
+How?
+	
+
+What are the guidelines for the management of floods according 
+to the National Disaster Management Authority (NDMA)?
+	
+
+What role can students/youth play in helping with disaster 
+preparedness?
+Before we move on...
+	
+Æ
+The Earth’s atmosphere is made up of different gases, mainly 
+nitrogen and oxygen, along with small amounts of other gases 
+like water vapour and dust, support life and help in forming 
+clouds and causing rainfall.
+	
+Æ
+The atmosphere is made up of different layers, namely the 
+Troposphere, Stratosphere, Mesosphere, Thermosphere, and 
+Exosphere, which are divided based on changes in temperature 
+and air density as we go higher above
+
+</study_context>
+
+[RESPONSE]
+{"questions":[{"section":"Section A","question_order":1,"question_type":"MCQ","question_text":"Which gas constitutes the largest percentage of Earth's atmosphere?","options":["Nitrogen","Oxygen","Argon","Carbon Dioxide"],"correct_answer":"Nitrogen","explanation":"Nitrogen makes up about 78% of the atmosphere, the highest of all gases.","marking_scheme":null,"marks":1.0,"topic_tag":"Composition of the Atmosphere","source_material_id":"bf964be5-308f-45cb-ad92-92b76db8824b"},{"section":"Section A","question_order":2,"question_type":"MCQ","question_text":"In which atmospheric layer do most commercial aeroplanes operate?","options":["Troposphere","Stratosphere","Mesosphere","Exosphere"],"correct_answer":"Troposphere","explanation":"The troposphere contains the bulk of the air mass and provides the lift needed for aircraft.","marking_scheme":null,"marks":1.0,"topic_tag":"Structure of the Atmosphere","source_material_id":"bf964be5-308f-45cb-ad92-92b76db8824b"},{"section":"Section B","question_order":1,"question_type":"SHORT_ANSWER","question_text":"Explain why we do not feel the pressure of the atmosphere on our bodies.","options":null,"correct_answer":"We do not feel atmospheric pressure because the pressure acts equally on all sides of our body, and our internal body pressure balances the external atmospheric pressure, resulting in no net sensation.","explanation":null,"marking_scheme":[{"point":"State that atmospheric pressure acts on all sides of the body","marks":1},{"point":"Mention that internal body pressure equals external atmospheric pressure","marks":1},{"point":"Conclude that the balanced pressures produce no net feeling","marks":1}],"marks":3.0,"topic_tag":"Atmospheric Pressure","source_material_id":"bf964be5-308f-45cb-ad92-92b76db8824b"}]}
+
+================================================================================

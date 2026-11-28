@@ -1,9 +1,9 @@
 # backend/models.py
-from sqlalchemy import Column, String, Integer, Numeric, Date, DateTime, ForeignKey, text, JSON, Time,UniqueConstraint
+from sqlalchemy import Column, String, Integer, Numeric, Date, DateTime, ForeignKey, text, JSON, Time,UniqueConstraint, Text, func
 from sqlalchemy.dialects.postgresql import UUID, ARRAY,JSONB
 from sqlalchemy.orm import relationship
 from database import Base
-
+import uuid
  
 
 class Organization(Base):
@@ -141,3 +141,73 @@ class BatchMaterial(Base):
     material_id = Column(UUID(as_uuid=True), ForeignKey("materials.id", ondelete="CASCADE"), nullable=False)
     assigned_at = Column(DateTime(timezone=True), server_default=text("CURRENT_TIMESTAMP"))
     
+
+
+
+class Test(Base):
+    __tablename__ = "tests"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    batch_id = Column(UUID(as_uuid=True), ForeignKey("batches.id", ondelete="CASCADE"), nullable=False)
+    title = Column(Text, nullable=False)
+    test_date = Column(Date, nullable=True)
+    duration_minutes = Column(Integer, default=45)
+    total_marks = Column(Numeric(6, 2), nullable=False, default=0)
+    difficulty = Column(String(20), nullable=False, default="MEDIUM")
+    instructions = Column(Text, nullable=True)
+    source_material_ids = Column(ARRAY(UUID(as_uuid=True)), nullable=False, default=list)
+    blueprint = Column(JSONB, nullable=False, default=dict)
+    status = Column(String(20), nullable=False, default="DRAFT")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
+
+    questions = relationship(
+        "TestQuestion",
+        back_populates="test",
+        cascade="all, delete-orphan",
+        order_by="(TestQuestion.section, TestQuestion.question_order)",
+    )
+    results = relationship(
+        "TestResult",
+        back_populates="test",
+        cascade="all, delete-orphan",
+    )
+
+
+class TestQuestion(Base):
+    __tablename__ = "test_questions"
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    test_id = Column(UUID(as_uuid=True), ForeignKey("tests.id", ondelete="CASCADE"), nullable=False)
+    section = Column(String(50), nullable=False)
+    question_order = Column(Integer, nullable=False)
+    question_type = Column(String(30), nullable=False)
+    question_text = Column(Text, nullable=False)
+    options = Column(JSONB, nullable=True)
+    correct_answer = Column(Text, nullable=False)
+    explanation = Column(Text, nullable=True)
+    marking_scheme = Column(JSONB, nullable=True)
+    marks = Column(Numeric(5, 2), nullable=False, default=1)
+    topic_tag = Column(Text, nullable=True)
+    source_material_id = Column(UUID(as_uuid=True), ForeignKey("materials.id", ondelete="SET NULL"), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
+
+    test = relationship("Test", back_populates="questions")
+
+
+class TestResult(Base):
+    __tablename__ = "test_results"
+    __table_args__ = (UniqueConstraint("test_id", "student_id", name="uq_test_student"),)
+
+    id = Column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    test_id = Column(UUID(as_uuid=True), ForeignKey("tests.id", ondelete="CASCADE"), nullable=False)
+    student_id = Column(UUID(as_uuid=True), ForeignKey("students.id", ondelete="CASCADE"), nullable=False)
+    marks_obtained = Column(Numeric(6, 2), nullable=True)
+    status = Column(String(20), nullable=False, default="PENDING")
+    remarks = Column(Text, nullable=True)
+    graded_at = Column(DateTime(timezone=True), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now(), nullable=False)
+
+    test = relationship("Test", back_populates="results")
